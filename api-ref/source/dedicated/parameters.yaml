@@ -1,11 +1,58 @@
 ###
 # Path fields
 ###
+path-certificate-id:
+  description: |
+    Specifies the certificate ID.
+  in: path
+  required: true
+  type: uuid
 path-flavor-id:
   description: |
     Specifies the flavor ID.
   in: path
   required: yes
+  type: uuid
+path-healthmonitor-id:
+  description: |
+    Specifies the health monitor.
+  in: path
+  required: true
+  type: uuid
+path-l7policy-id:
+  description: |
+    Specifies the forwarding policy ID.
+  in: path
+  required: true
+  type: uuid
+path-l7rule-id:
+  description: |
+    Specifies the forwarding rule ID.
+  in: path
+  required: true
+  type: uuid
+path-listener-id:
+  description: |
+    Specifies the listener ID.
+  in: path
+  required: true
+  type: uuid
+path-loadbalancer-id:
+  description: |
+    Specifies the load balancer ID.
+  in: path
+  required: true
+  type: uuid
+path-member-id:
+  description: |
+    Specifies the Pool member ID.
+  in: path
+  required: true
+  type: uuid
+path-pool-id:
+  description: Specifies the ID of the backend server group.
+  in: path
+  required: true
   type: uuid
 path-project-id:
   description: |
@@ -16,6 +63,40 @@ path-project-id:
 ###
 # Query parameters
 ###
+admin_state_up-unsupported-query:
+  description: |
+    Specifies the administrative status of the resource.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: bool
+certificate-domain-query:
+  description: |
+    Specifies the domain names used by the server certificate. This parameter is available only when type is set to server.
+
+    Multiple domain names can be queried in the format of domain=xxx&domain=xxx.
+  in: query
+  required: false
+  type: string
+certificate-type-query:
+  description: |
+    Specifies the certificate type.
+
+    The value can be server or client. server indicates server certificates, and client indicates CA certificates.
+
+    Multiple types can be queried in the format of type=xxx&type=xxx.
+  in: query
+  required: false
+  type: string
+description-query:
+  description: |
+    Provides supplementary information (description) about the resource.
+
+    Multiple descriptions can be queried in the format of description=xxx&description=xxx.
+  in: query
+  required: false
+  type: string
 flavor-id-query:
   description: |
     Specifies the flavor ID.
@@ -38,7 +119,321 @@ flavor-shared-query:
   in: query
   required: no
   type: boolean
+healthmonitor-admin_state_up-query:
+  description: |
+    Specifies the administrative status of the health check.
 
+    Although this parameter can be used in the APIs for creating and updating health checks, its actual value depends on whether cloud servers that serve as the backend servers exist. If cloud servers exist, the value is true. Otherwise, the value is false.
+  in: query
+  required: false
+  type: bool
+healthmonitor-delay-query:
+  description: |
+    Specifies the interval between health checks, in seconds.
+
+    Multiple intervals can be queried in the format of delay=xxx&delay=xxx.
+  in: query
+  required: false
+  type: number
+healthmonitor-domain_name-query:
+  description: |
+    Specifies the domain name to which HTTP requests are sent during the health check.
+
+    This parameter will take effect only when type is set to HTTP.
+
+    The value is left blank by default, indicating that the virtual IP address bound to the load balancer is used as the destination of HTTP requests.
+
+    The value can contain only digits, letters, hyphens (-), and periods (.) and must start with a digit or letter.
+
+    Multiple domain names can be queried in the format of domain_name=xxx&domain_name=xxx.
+  in: query
+  required: false
+  type: string
+healthmonitor-expected_codes-query:
+  description: |
+    Specifies the expected HTTP status code. This parameter will take effect only when type is set to HTTP.
+
+    The value options are as follows:
+
+    - A specific value, for example, 200
+    - A list of values that are separated with commas (,), for example, 200, 202
+    - A value range, for example, 200-204
+
+    Multiple status codes can be queried in the format of expected_codes=xxx&expected_codes=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+healthmonitor-http_method-query:
+  description: |
+    Specifies the HTTP method. This parameter will take effect only when type is set to HTTP.
+
+    The value can be GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, CONNECT, or PATCH.
+
+    Multiple methods can be queried in the format of http_method=xxx&http_method=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+healthmonitor-id-query:
+  description: |
+    Specifies the health check ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+healthmonitor-max_retries-query:
+  description: |
+    Specifies the maximum number of retries.
+
+    Multiple values can be queried in the format of max_retries=xxx&max_retries=xxx.
+  in: query
+  required: false
+  type: number
+healthmonitor-max_retries_down-query:
+  description: |
+    Specifies the number of consecutive health checks when the health check result of a backend server changes from ONLINE to OFFLINE. The value ranges from 1 to 10.
+  in: query
+  required: false
+  type: number
+healthmonitor-monitor_port-query:
+  description: |
+    Specifies the port used for the health check.
+
+    Multiple ports can be queried in the format of monitor_port=xxx&monitor_port=xxx.
+  in: query
+  required: false
+  type: number
+healthmonitor-name-query:
+  description: |
+    Specifies the health check name.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
+healthmonitor-timeout-query:
+  description: |
+    Specifies the maximum time required for waiting for a response from the health check, in seconds. It is recommended that you set the value less than that of parameter delay.
+  in: query
+  required: false
+  type: number
+healthmonitor-type-query:
+  description: |
+    Specifies the health check protocol.
+
+    Multiple protocols can be queried in the format of type=xxx&type=xxx.
+  in: query
+  required: false
+  type: string
+healthmonitor-url_path-query:
+  description: |
+    Specifies the HTTP request path for the health check. The value must start with a slash (/), and the default value is /. This parameter is available only when type is set to HTTP.
+
+    Multiple paths can be queried in the format of url_path=xxx&url_path=xxx.
+  in: query
+  required: false
+  type: string
+id-query:
+  description: |
+    Specifies resource ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+l7policy-action-query:
+  description: |
+    Specifies where requests will be forwarded. The value can be one of the following:
+
+    - REDIRECT_TO_POOL: Requests will be forwarded to another backend server group.
+    - REDIRECT_TO_LISTENER: Requests will be redirected to an HTTPS listener.
+
+    Multiple values can be queried in the format of action=xxx&action=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-admin_state_up-query:
+  description: |
+    Specifies the administrative status of the forwarding policy. The default value is true.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: bool
+l7policy-description-query:
+  description: |
+    Provides supplementary information about the forwarding policy.
+
+    Multiple descriptions can be queried in the format of description=xxx&description=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-display_all_rules-query:
+  description: |
+    Specifies whether to display all information about the forwarding rule in the forwarding policy. The value can be true or false.
+
+    true indicates all information about the forwarding rule is displayed.
+
+    false indicates that only the rule ID is displayed.
+  in: query
+  required: false
+  type: bool
+l7policy-id-query:
+  description: |
+    Specifies the forwarding policy ID.
+  in: query
+  required: false
+  type: uuid
+l7policy-listener_id-query:
+  description: |
+    Specifies the ID of the listener to which the forwarding policy is added.
+
+    If action is set to REDIRECT_TO_POOL, the forwarding policy can be added to an HTTP or HTTPS listener.
+
+    If action is set to REDIRECT_TO_LISTENER, the forwarding policy can be added to an HTTP listener.
+
+    Multiple IDs can be queried in the format of listener_id=xxx&listener_id=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-name-query:
+  description: |
+    Specifies the forwarding policy name.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-position-query:
+  description: |
+    Specifies the forwarding policy priority.
+
+    Multiple priorities can be queried in the format of position=xxx&position=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7policy-priority-query:
+  description: |
+    Specifies the forwarding policy priority. A smaller value indicates a higher priority.
+
+    Multiple priorities can be queried in the format of position=xxx&position=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7policy-provisioning_status-query:
+  description: |
+    Specifies the provisioning status of the forwarding policy. The value can only be ACTIVE, indicating that the forwarding policy is provisioned successfully.
+
+    Multiple provisioning statuses can be queried in the format of provisioning_status=xxx&provisioning_status=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-redirect_listener_id-query:
+  description: |
+    Specifies the ID of the listener to which requests are redirected. This parameter will take effect and is mandatory when action is set to REDIRECT_TO_LISTENER.
+
+    Multiple IDs can be queried in the format of redirect_listener_id=xxx&redirect_listener_id=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-redirect_pool_id-query:
+  description: |
+    Specifies the ID of the backend server group to which requests are forwarded. This parameter will take effect and is mandatory when action is set to REDIRECT_TO_POOL.
+
+    Multiple IDs can be queried in the format of redirect_pool_id=xxx&redirect_pool_id=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-redirect_url-query:
+  description: |
+    Specifies the URL to which requests are forwarded.
+
+    Multiple URLs can be queried in the format of redirect_url=xxx&redirect_url=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7rule-admin_state_up-query:
+  description: |
+    Specifies the administrative status of the forwarding rule. The default value is true.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: bool
+l7rule-compare_type-query:
+  description: |
+    Specifies how requests are matched with the domain name or URL.
+
+    If type is set to HOST_NAME, this parameter can only be set to EQUAL_TO.
+
+    If type is set to PATH, this parameter can be set to REGEX, STARTS_WITH, or EQUAL_TO.
+
+    Multiple values can be queried in the format of compare_type=xxx&compare_type=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-id-query:
+  description: |
+    Specifies the forwarding rule ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+l7rule-invert-query:
+  description: |
+    Specifies whether reverse matching is supported. The value is fixed at false. This parameter can be updated but remains invalid.
+  in: query
+  required: false
+  type: bool
+l7rule-key-query:
+  description: |
+    Specifies the key of the match content that is used to identify the forwarding rule.
+
+    Multiple keys can be queried in the format of key=xxx&key=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7rule-provisioning_status-query:
+  description: |
+    Specifies the provisioning status of the forwarding rule. The value can only be ACTIVE, indicating that the forwarding rule is provisioned successfully.
+
+    Multiple provisioning statuses can be queried in the format of provisioning_status=xxx&provisioning_status=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-type-query:
+  description: |
+    Specifies the match content. The value can be HOST_NAME or PATH.
+
+    HOST_NAME indicates that the domain name will be used for matching, and PATH indicates that the URL will be used for matching.
+
+    The type value must be unique for each forwarding rule in a forwarding policy.
+
+    Multiple values can be queried in the format of type=xxx&type=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-value-query:
+  description: |
+    Specifies the value of the match content.
+
+    Multiple values can be queried in the format of value=xxx&value=xxx.
+  in: query
+  required: false
+  type: str
 limit:
   description: |
     Specifies the number of records on each page.
@@ -47,17 +442,567 @@ limit:
   in: query
   required: no
   type: integer
+l7policy-redirect_pool_id-query:
+  description: |
+    Specifies the ID of the backend server group to which requests are forwarded. This parameter will take effect and is mandatory when action is set to REDIRECT_TO_POOL.
+
+    Multiple IDs can be queried in the format of redirect_pool_id=xxx&redirect_pool_id=xxx.
+  in: query
+  required: false
+  type: str
+l7policy-redirect_url-query:
+  description: |
+    Specifies the URL to which requests are forwarded.
+
+    Multiple URLs can be queried in the format of redirect_url=xxx&redirect_url=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7rule-admin_state_up-query:
+  description: |
+    Specifies the administrative status of the forwarding rule. The default value is true.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: bool
+l7rule-compare_type-query:
+  description: |
+    Specifies how requests are matched with the domain name or URL.
+
+    If type is set to HOST_NAME, this parameter can only be set to EQUAL_TO.
+
+    If type is set to PATH, this parameter can be set to REGEX, STARTS_WITH, or EQUAL_TO.
+
+    Multiple values can be queried in the format of compare_type=xxx&compare_type=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-id-query:
+  description: |
+    Specifies the forwarding rule ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+l7rule-invert-query:
+  description: |
+    Specifies whether reverse matching is supported. The value is fixed at false. This parameter can be updated but remains invalid.
+  in: query
+  required: false
+  type: bool
+l7rule-key-query:
+  description: |
+    Specifies the key of the match content that is used to identify the forwarding rule.
+
+    Multiple keys can be queried in the format of key=xxx&key=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: str
+l7rule-provisioning_status-query:
+  description: |
+    Specifies the provisioning status of the forwarding rule. The value can only be ACTIVE, indicating that the forwarding rule is provisioned successfully.
+
+    Multiple provisioning statuses can be queried in the format of provisioning_status=xxx&provisioning_status=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-type-query:
+  description: |
+    Specifies the match content. The value can be HOST_NAME or PATH.
+
+    HOST_NAME indicates that the domain name will be used for matching, and PATH indicates that the URL will be used for matching.
+
+    The type value must be unique for each forwarding rule in a forwarding policy.
+
+    Multiple values can be queried in the format of type=xxx&type=xxx.
+  in: query
+  required: false
+  type: str
+l7rule-value-query:
+  description: |
+    Specifies the value of the match content.
+
+    Multiple values can be queried in the format of value=xxx&value=xxx.
+  in: query
+  required: false
+  type: str
+limit:
+  description: |
+    Specifies the number of records on each page.
+    Minimum: 0
+    Maximum: 2000
+  in: query
+  required: no
+  type: integer
+listener-client_ca_tls_container_ref-query:
+  description: |
+    Specifies the ID of the CA certificate used by the listener.
+
+    Multiple IDs can be queried in the format of client_ca_tls_container_ref=xxx&client_ca_tls_container_ref=xxx.
+  in: query
+  required: false
+  type: string
+listener-client_timeout-query:
+  description: |
+    Specifies the timeout duration for waiting for a request from a client, in seconds.
+
+    This parameter is available only for HTTP and HTTPS listeners. The value ranges from 1 to 300.
+
+    Multiple durations can be queried in the format of client_timeout=xxx&client_timeout=xxx.
+  in: query
+  required: false
+  type: number
+listener-connection_limit-query:
+  description: |
+    Specifies the maximum number of connections that the load balancer can handle. The default value is -1.
+
+    Multiple values can be queried in the format of connection_limit=xxx&connection_limit=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+listener-default_pool_id-query:
+  description: |
+    Specifies the ID of the default backend server group. If there is no matched forwarding policy, requests will be routed to the default backend server.
+
+    Multiple IDs can be queried in the format of default_pool_id=xxx&default_pool_id=xxx.
+  in: query
+  required: false
+  type: string
+listener-default_tls_container_ref-query:
+  description: |
+    Specifies the ID of the server certificate used by the listener.
+
+    Multiple IDs can be queried in the format of default_tls_container_ref=xxx&default_tls_container_ref=xxx.
+  in: query
+  required: false
+  type: string
+listener-description-query:
+  description: |
+    Provides supplementary information about the listener.
+
+    Multiple descriptions can be queried in the format of description=xxx&description=xxx.
+  in: query
+  required: false
+  type: string
+listener-enable_member_retry-query:
+  description: |
+    Specifies whether to enable health check retries for backend servers.
+  in: query
+  required: false
+  type: bool
+listener-http2_enable-query:
+  description: |
+    Specifies whether to use HTTP/2. This parameter is available only for HTTPS listeners. If you configure this parameter for other types of listeners, it will not take effect.
+
+    Enable HTTP/2 if you want the clients to use HTTP/2 to communicate with the load balancer. However, connections between the load balancer and backend servers use HTTP/1.x by default.
+  in: query
+  required: false
+  type: bool
+listener-id-query:
+  description: |
+    Specifies the listener ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+listener-keepalive_timeout-query:
+  description: |
+    Specifies the idle timeout duration, in seconds.
+
+    - For TCP listeners, the value ranges from 10 to 4000, and the default value is 300.
+    - For HTTP and HTTPS listeners, the value ranges from 0 to 4000, and the default value is 60.
+    - For UDP listeners, this parameter does not take effect.
+
+    Multiple durations can be queried in the format of keepalive_timeout=xxx&keepalive_timeout=xxx.
+  in: query
+  required: false
+  type: number
+listener-loadbalancer_id-query:
+  description: |
+    Specifies the ID of the load balancer that the listener is added to.
+
+    Multiple IDs can be queried in the format of loadbalancer_id=xxx&loadbalancer_id=xxx.
+  in: query
+  required: false
+  type: uuid
+listener-member_address-query:
+  description: |
+    Specifies the private IP address bound to the backend server. This parameter is used only as a query condition and is not included in the response.
+
+    Multiple IP addresses can be queried in the format of member_address=xxx&member_address=xxx.
+  in: query
+  required: false
+  type: string
+listener-member_device_id-query:
+  description: |
+    Specifies the ID of the cloud server that serves as a backend server. This parameter is used only as a query condition and is not included in the response.
+
+    Multiple IDs can be queried in the format of member_device_id=xxx&member_device_id=xxx.
+  in: query
+  required: false
+  type: string
+listener-member_timeout-query:
+  description: |
+    Specifies the timeout duration for waiting for a request from a backend server, in seconds.
+
+    This parameter is available only for HTTP and HTTPS listeners. The value ranges from 1 to 300.
+
+    Multiple durations can be queried in the format of member_timeout=xxx&member_timeout=xxx.
+  in: query
+  required: false
+  type: number
+listener-name-query:
+  description: |
+    Specifies the name of the listener added to the load balancer.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
+listener-protocol-query:
+  description: |
+    Specifies the protocol used by the listener. The protocol can be UDP, TCP, HTTP, or HTTPS.
+
+    Multiple protocols can be queried in the format of protocol=xxx&protocol=xxx.
+  in: query
+  required: false
+  type: string
+listener-protocol_port-query:
+  description: |
+    Specifies the port used by the listener.
+
+    Multiple ports can be queried in the format of protocol_port=xxx&protocol_port=xxx.
+  in: query
+  required: false
+  type: number
+listener-tls_ciphers_policy-query:
+  description: |
+    Specifies the security policy used by the listener. This parameter is available only for HTTPS listeners.
+
+    The value can be tls-1-0, tls-1-1, tls-1-2, or tls-1-2-strict, and the default value is tls-1-0.
+
+    Multiple security policies can be queried in the format of tls_ciphers_policy=xxx&tls_ciphers_policy=xxx.
+  in: query
+  required: false
+  type: string
+listener-transparent_client_ip_enable-query:
+  description: |
+    Specifies whether to pass source IP addresses of the clients to backend servers.
+
+    Shared load balancers: The value can be true or false, and the default value is false for TCP and UDP listeners. The value can only be true for HTTP and HTTPS listeners. If this parameter is not passed, the default value is true.
+
+    Dedicated load balancers: The value can only be true for all types of listeners. If this parameter is not passed, the default value is true.
+  in: query
+  required: false
+  type: boolean
+loadbalancer-availability_zone_list-query:
+  description: |
+    Specifies the list of AZs where the load balancer is created. You can query the AZs by calling the API (/v3/{project_id}/elb/availability-zones).
+
+    Multiple AZs can be queried in the format of availability_zone_list=xxx&availability_zone_list=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-description-query:
+  description: |
+    Provides supplementary information about the load balancer.
+
+    Multiple descriptions can be queried in the format of description=xxx&description=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-eips-query:
+  description: |
+    Specifies the EIP bound to the load balancer.
+
+    The following is an example:
+
+    "eips": [ { "eip_id": "e9b72a9d-4275-455e-a724-853504e4d9c6", "eip_address": "88.88.14.122", "ip_version": 4 } ]
+
+    Multiple EIPs can be queried in the format of eips=eip_id=xxx&eips=eip_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-guaranteed-query:
+  description: |
+    Specifies whether the load balancer is a dedicated load balancer. The value can only be true.
+  in: query
+  required: false
+  type: string
+loadbalancer-id-query:
+  description: |
+    Specifies the load balancer ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+loadbalancer-ip_version-query:
+  description: |
+    Specifies the IP version. The value can be 4 (IPv4) or 6 (IPv6).
+
+    Multiple versions can be queried in the format of ip_version=xxx&ip_version=xxx.
+
+    IPv6 is unsupported. The value cannot be 6.
+  in: query
+  required: false
+  type: string
+loadbalancer-ipv6_vip_address-query:
+  description: |
+    Specifies the IPv6 address bound to the load balancer.
+
+    Multiple IPv6 addresses can be queried in the format of ipv6_vip_address=xxx&ipv6_vip_address=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+loadbalancer-ipv6_vip_port_id-query:
+  description: |
+    Specifies the ID of the port bound to the IPv6 address of the load balancer.
+
+    Multiple ports can be queried in the format of ipv6_vip_port_id=xxx&ipv6_vip_port_id=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+loadbalancer-ipv6_vip_virsubnet_id-query:
+  description: |
+    Specifies the ID of the IPv6 subnet where the load balancer works.
+
+    Multiple IDs can be queried in the format of ipv6_vip_virsubnet_id=xxx&ipv6_vip_virsubnet_id=xxx.
+
+    This parameter is unsupported. Please do not use it.
+  in: query
+  required: false
+  type: string
+loadbalancer-l4_flavor_id-query:
+  description: |
+    Specifies the ID of the flavor at Layer 4.
+
+    Multiple IDs can be queried in the format of l4_flavor_id=xxx&l4_flavor_id=xxx.
+  in: query
+  required: false
+  type: uuid
+loadbalancer-l4_scale_flavor_id-query:
+  description: |
+    Specifies the elastic flavor that is reserved for now.
+
+    Multiple flavors can be queried in the format of l4_scale_flavor_id=xxx&l4_scale_flavor_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-l7_flavor_id-query:
+  description: |
+    Specifies the ID of the flavor at Layer 4.
+
+    Multiple IDs can be queried in the format of l7_flavor_id=xxx&l7_flavor_id=xxx.
+  in: query
+  required: false
+  type: uuid
+loadbalancer-l7_scale_flavor_id-query:
+  description: |
+    Specifies the elastic flavor that is reserved for now.
+
+    Multiple flavors can be queried in the format of l7_scale_flavor_id=xxx&l7_scale_flavor_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-member_address-query:
+  description: |
+    Specifies the private IP address of the backend server. This parameter is used only as a query condition and is not included in the response.
+  in: query
+  required: false
+  type: string
+loadbalancer-member_device_id-query:
+  description: |
+    Specifies the ID of the cloud server that serves as a backend server. This parameter is used only as a query condition and is not included in the response.
+
+    Multiple IDs can be queried in the format of member_device_id=xxx&member_device_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-name-query:
+  description: |
+    Specifies the load balancer name.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-operating_status-query:
+  description: |
+    Specifies the operating status of the load balancer. The value can only be ONLINE, indicating that the load balancer is working normally.
+
+    Multiple operating statuses can be queried in the format of operating_status=xxx&operating_status=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-provisioning_status-query:
+  description: |
+    Specifies the provisioning status of the load balancer. The value can only be ACTIVE, indicating that the load balancer is provisioned successfully.
+
+    Multiple provisioning statuses can be queried in the format of provisioning_status=xxx&provisioning_status=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-publicips-query:
+  description: |
+    Specifies the public IP address bound to the load balancer.
+
+    The following is an example:
+
+    "publicips": [ { "publicip_id": "e9b72a9d-4275-455e-a724-853504e4d9c6", "publicip_address": "88.88.14.122", "publicip_ip_version": 4 } ]
+
+    Multiple EIPs can be queried in the format of publicips=publicip_id=xxx&publicips=publicip_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-vip_address-query:
+  description: |
+    Specifies the virtual IP address bound to the load balancer.
+
+    Multiple virtual IP addresses can be queried in the format of vip_address=xxx&vip_address=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-vip_port_id-query:
+  description: |
+    Specifies the ID of the port bound to the virtual IP address of the load balancer.
+
+    Multiple IDs can be queried in the format of vip_port_id=xxx&vip_port_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-vip_subnet_cidr_id-query:
+  description: |
+    Specifies the ID of the subnet where the load balancer works.
+
+    Multiple IDs can be queried in the format of vip_subnet_cidr_id=xxx&vip_subnet_cidr_id=xxx.
+  in: query
+  required: false
+  type: string
+loadbalancer-vpc_id-query:
+  description: |
+    Specifies the ID of the VPC where the load balancer works.
+
+    Multiple IDs can be queried in the format of vpc_id=xxx&vpc_id=xxx.
+  in: query
+  required: false
+  type: uuid
 marker:
   description: |
     Specifies the ID of the last record on the previous page.
 
     Note:
-      - This parameter must be used together with limit.
-      - If this parameter is not specified, the first page will be queried.
-      - This parameter cannot be left blank or set to an invalid ID.
+    - This parameter must be used together with limit.
+    - If this parameter is not specified, the first page will be queried.
+    - This parameter cannot be left blank or set to an invalid ID.
   in: query
   required: no
   type: uuid
+member-address-query:
+  description: |
+    Specifies the IP address bound to the backend server.
+
+    The IP address must be in the subnet specified by subnet_cidr_id, for example, 192.168.3.11.
+
+    The IP address can be used only by the primary NIC.
+
+    Multiple IP addresses can be queried in the format of address=xxx&address=xxx.
+  in: query
+  required: false
+  type: string
+member-admin_state_up-query:
+  description: |
+    Specifies the administrative status of the backend server.
+
+    Although this parameter can be used in the APIs for creating and updating backend servers, its actual value depends on whether cloud servers that serve as the backend servers exist. If cloud servers exist, the value is true. Otherwise, the value is false.
+  in: query
+  required: false
+  type: bool
+member-id-query:
+  description: |
+    Specifies the backend server ID.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+member-ip_version-query:
+  description: |
+    Specifies the IP version. The value can be 4 (IPv4) or 6 (IPv6).
+  in: query
+  required: false
+  type: string
+member-name-query:
+  description: |
+    Specifies the backend server name.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
+member-operating_status-query:
+  description: |
+    Specifies the operating status of the backend server. The value can be one of the following:
+
+    - ONLINE: The backend server is running normally.
+    - NO_MONITOR: No health check is configured for the backend server group to which the backend server belongs.
+    - OFFLINE: The cloud server used as the backend server is stopped or does not exist.
+
+    Multiple operating statuses can be queried in the format of operating_status=xxx&operating_status=xxx.
+  in: query
+  required: false
+  type: string
+member-protocol_port-query:
+  description: |
+    Specifies the port used by the backend server.
+
+    Multiple ports can be queried in the format of protocol_port=xxx&protocol_port=xxx.
+  in: query
+  required: false
+  type: number
+member-subnet_cidr_id-query:
+  description: |
+    Specifies the ID of the subnet where the backend server works.
+
+    This subnet must be in the same VPC as the subnet of the load balancer with which the backend server is associated. Only IPv4 subnets are supported.
+
+    Multiple IDs can be queried in the format of subnet_cidr_id=xxx&subnet_cidr_id=xxx.
+  in: query
+  required: false
+  type: string
+member-weight-query:
+  description: |
+    Specifies the weight of the backend server.
+
+    Requests are routed to backend servers in the same backend server group based on their weights. If the weight is 0, the backend server will not accept new requests.
+
+    This parameter will not take effect when lb_algorithm is set to SOURCE_IP for the backend server group that contains the backend server.
+
+    Multiple weights can be queried in the format of weight=xxx&weight=xxx.
+  in: query
+  required: false
+  type: number
+name-query:
+  description: |
+    Specifies the resourcename.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
 page-reverse:
   description: |
     Specifies the page direction.
@@ -67,9 +1012,252 @@ page-reverse:
   in: query
   required: no
   type: boolean
+pool-description-query:
+  description: |
+    Provides supplementary information about the backend server group.
+
+    Multiple descriptions can be queried in the format of description=xxx&description=xxx.
+  in: query
+  required: false
+  type: string
+pool-healthmonitor_id-query:
+  description: |
+    Specifies the ID of the health check configured for the backend server group.
+
+    Multiple IDs can be queried in the format of healthmonitor_id=xxx&healthmonitor_id=xxx.
+  in: query
+  required: false
+  type: uuid
+pool-id-query:
+  description: |
+    Specifies the ID of the backend server group.
+
+    Multiple IDs can be queried in the format of id=xxx&id=xxx.
+  in: query
+  required: false
+  type: uuid
+pool-ip_version-query:
+  description: |
+    Specifies the IP address version of the backend server group. The value can be dualstack, v4, or v6.
+
+    Multiple versions can be queried in the format of ip_version=xxx&ip_version=xxx.
+  in: query
+  required: false
+  type: string
+pool-lb_algorithm-query:
+  description: |
+    Specifies the load balancing algorithm used by the load balancer to route requests to backend servers in the backend server group.
+
+    The value can be ROUND_ROBIN (weighted round robin), LEAST_CONNECTIONS (weighted least connections), or SOURCE_IP (source IP hash).
+
+    If the value is SOURCE_IP, weight will not take effect.
+
+    Multiple algorithms can be queried in the format of lb_algorithm=xxx&lb_algorithm=xxx.
+  in: query
+  required: false
+  type: string
+pool-loadbalancer_id-query:
+  description: |
+    Specifies the ID of the load balancer associated with the backend server group.
+
+    Multiple IDs can be queried in the format of loadbalancer_id=xxx&loadbalancer_id=xxx.
+  in: query
+  required: false
+  type: uuid
+pool-member_address-query:
+  description: |
+    Specifies the private IP address bound to the backend server. This parameter is used only as a query condition and is not included in the response.
+
+    Multiple IP addresses can be queried in the format of member_address=xxx&member_address=xxx.
+  in: query
+  required: false
+  type: string
+pool-member_device_id-query:
+  description: |
+    Specifies the ID of the cloud server that serves as a backend server. This parameter is used only as a query condition and is not included in the response.
+
+    Multiple IDs can be queried in the format of member_device_id=xxx&member_device_id=xxx.
+  in: query
+  required: false
+  type: string
+pool-name-query:
+  description: |
+    Specifies the backend server group name.
+
+    Multiple names can be queried in the format of name=xxx&name=xxx.
+  in: query
+  required: false
+  type: string
+pool-protocol-query:
+  description: |
+    Specifies the protocol used by the backend server group to receive requests.
+
+    Multiple protocols can be queried in the format of protocol=xxx&protocol=xxx.
+  in: query
+  required: false
+  type: string
 ###
 # Body fields
 ###
+admin_state_up: &admin_state_up-def
+  description: |
+    Specifies the administrative status of the resource. The default value is true.
+  in: body
+  required: yes
+  type: boolean
+admin_state_up-notsupported: &admin_state_up-nsp-def
+  description: |
+    Specifies the administrative status of the resource. The default value is true.
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: yes
+  type: boolean
+admin_state_up-notsupported-optional:
+  <<: *admin_state_up-nsp-def
+  required: no
+admin_state_up-optional:
+  <<: *admin_state_up-def
+  required: no
+availability_zone-code:
+  description: |
+    Specifies the AZ code.
+  in: body
+  required: true
+  type: str
+availability_zone-state:
+  description: |
+    Specifies the AZ status. The value can only be ACTIVE.
+  in: body
+  required: true
+  type: str
+availability_zones:
+  description: |
+    Specifies the AZs that are available during load balancer creation.
+  in: body
+  required: true
+  type: array
+certificate:
+  description: |
+    Specifies the certificate.
+  in: body
+  required: true
+  type: object
+certificate-certificate:
+  description: |
+    Specifies the private key of the certificate. The value must be PEM encoded.
+  in: body
+  required: true
+  type: string
+certificate-description: &cert-cert-def
+  description: |
+    Provides supplementary information about the certificate.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+certificate-description-optional:
+  <<: *cert-cert-def
+  required: false
+certificate-domain: &cert-domain-def
+  description: |
+    Specifies the domain names used by the server certificate.
+
+    - This parameter will take effect only when type is set to server, and its default value is "".
+    - This parameter will not take effect even if it is passed and type is set to client. However, domain names will still be verified.
+
+    Note:
+
+    - The value can contain 0 to 1024 characters and consists of multiple common domain names or wildcard domain names separated by commas. A maximum of 30 domain names are allowed.
+    - A common domain name consists of several labels separated by periods (.). Each label can contain a maximum of 63 characters, including letters, digits, and hyphens (-), and must start and end with a letter or digit. Example: www.test.com
+    - A wildcard domain name is a domain name starts with an asterisk (\*). Example: \*.test.com
+  in: body
+  required: true
+  type: string
+certificate-domain-optional:
+  <<: *cert-domain-def
+  required: false
+certificate-expire_time:
+  description: |
+    Specifies the time when the certificate expires.
+  in: body
+  required: true
+  type: string
+certificate-name: &cert-name-def
+  description: |
+    Specifies the certificate name. Only letters, digits, underscores, and hyphens are allowed.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+certificate-name-optional:
+  <<: *cert-name-def
+  required: true
+certificate-private_key: &cert-pk-def
+  description: |
+    Specifies the private key of the server certificate. The value must be PEM encoded.
+
+    This parameter will be ignored if type is set to client. A CA server can still be created and used normally. This parameter will be left blank even if you enter a private key that is not PEM encoded.
+
+    This parameter is valid and mandatory only when type is set to server. If you enter an invalid private key, an error is returned.
+  in: body
+  required: true
+  type: string
+certificate-private_key-optional:
+  <<: *cert-pk-def
+  required: false
+certificate-type: &cert-type
+  description: |
+    Specifies the certificate type.
+
+    The value can be server or client. server indicates server certificates, and client indicates CA certificates. The default value is server.
+  in: body
+  required: true
+  type: string
+certificate-type-optional:
+  <<: *cert-type
+  required: false
+certificates:
+  description: |
+    Lists the certificates.
+  in: body
+  required: true
+  type: array
+created_at:
+  description: |
+    Specifies when the resource was created.
+  in: body
+  required: true
+  type: string
+eip-address:
+  description: |
+    Specifies the specific IP address.
+  in: body
+  required: true
+  type: string
+eip-id:
+  description: |
+    Specifies the EIP ID.
+  in: body
+  required: true
+  type: uuid
+eip-ip_version:
+  description: |
+    Specifies the IP version. 4 indicates IPv4, and 6 indicates IPv6.
+
+    IPv6 is unsupported. The value cannot be 6.
+  in: body
+  required: true
+  type: string
+eips:
+  description: |
+    Specifies the EIP bound to the load balancer.
+  in: body
+  required: true
+  type: array
 flavor:
   description: |
     Specifies the flavors.
@@ -141,21 +1329,1790 @@ flavors:
   in: body
   type: array
   required: true
-page-info:
+healthmonitor:
+  description: |
+    Specifies the health check.
+  in: body
+  required: true
+  type: object
+healthmonitor-admin_state_up: &hm-admin_state_up-def
+  description: |
+    Specifies the administrative status of the health check. Two value options are available. true indicates that the health check is enabled, and false indicates that the health check is disabled.
+
+    Default: true
+  in: body
+  required: true
+  type: bool
+healthmonitor-admin_state_up-optional:
+  <<: *hm-admin_state_up-def
+  required: false
+healthmonitor-delay: &hm-delay-def
+  description: |
+    Specifies the interval between health checks, in seconds.
+
+    Minimum: 1
+    Maximum: 50
+  in: body
+  required: true
+  type: integer
+healthmonitor-delay-optional:
+  <<: *hm-delay-def
+  required: false
+healthmonitor-domain_name: &hm-domain_name-def
+  description: |
+    Specifies the domain name that HTTP requests are sent to during the health check.
+
+    This parameter is available only when type is set to HTTP.
+
+    The value is left blank by default, indicating that the virtual IP address of the load balancer is used as the destination address of HTTP requests.
+
+    The value can contain only digits, letters, hyphens (-), and periods (.) and must start with a digit or letter.
+
+    Minimum: 1
+    Maximum: 100
+  in: body
+  required: true
+  type: string
+healthmonitor-domain_name-optional:
+  <<: *hm-domain_name-def
+  required: false
+healthmonitor-expected_codes: &hm-expected_codes-def
+  description: |
+    Specifies the expected HTTP status code. This parameter will take effect only when type is set to HTTP.
+
+    The value options are as follows:
+
+    - A specific value, for example, 200
+    - A list of values that are separated with commas (,), for example, 200, 202
+    - A value range, for example, 200-204
+
+    This parameter is unsupported. Please do not use it.
+
+    Default: 200
+    Minimum: 1
+    Maximum: 64
+  in: body
+  required: true
+  type: string
+healthmonitor-expected_codes-optional:
+  <<: *hm-expected_codes-def
+  required: false
+healthmonitor-http_method: &hm-http_method-def
+  description: |
+    Specifies the HTTP method.
+
+    The value can be GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, CONNECT, or PATCH.
+
+    This parameter will take effect only when type is set to HTTP.
+
+    This parameter is unsupported. Please do not use it.
+
+    Default: GET
+    Minimum: 1
+    Maximum: 16
+  in: body
+  required: true
+  type: string
+healthmonitor-http_method-optional:
+  <<: *hm-http_method-def
+  required: false
+healthmonitor-id:
+  description: |
+    Specifies the health check ID.
+  in: body
+  required: true
+  type: uuid
+healthmonitor-max_retries: &hm-max_retries-def
+  description: |
+    Specifies the number of consecutive health checks when the health check result of a backend server changes from OFFLINE to ONLINE. The value ranges from 1 to 10.
+
+    Minimum: 1
+    Maximum: 10
+  in: body
+  required: true
+  type: number
+healthmonitor-max_retries-optional:
+  <<: *hm-max_retries-def
+  required: false
+healthmonitor-max_retries_down: &hm-max_retries_down-def
+  description: |
+    Specifies the number of consecutive health checks when the health check result of a backend server changes from ONLINE to OFFLINE.
+
+    Minimum: 1
+    Maximum: 10
+    Default: 3
+  in: body
+  required: true
+  type: number
+healthmonitor-max_retries_down-optional:
+  <<: *hm-max_retries_down-def
+  required: false
+healthmonitor-monitor_port: &hm-monitor_port-def
+  description: |
+    Specifies the port used for the health check. If this parameter is left blank, the port of the backend server group will be used by default.
+
+    Minimum: 1
+    Maximum: 65535
+  in: body
+  required: true
+  type: number
+healthmonitor-monitor_port-optional:
+  <<: *hm-monitor_port-def
+  required: false
+healthmonitor-name: &hm-name-def
+  description: |
+    Specifies the health check name.
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+healthmonitor-name-optional:
+  <<: *hm-name-def
+  required: false
+healthmonitor-pool_id:
+  description: |
+    Specifies the ID of the backend server group for which the health check is configured.
+  in: body
+  required: true
+  type: uuid
+healthmonitor-pools:
+  description: |
+    Lists the IDs of backend server groups for which the health check is configured.
+  in: body
+  required: true
+  type: array
+healthmonitor-timeout: &hm-timeout-def
+  description: |
+    Specifies the maximum time required for waiting for a response from the health check, in seconds. It is recommended that you set the value less than that of parameter delay.
+
+    Minimum: 1
+    Maximum: 50
+  in: body
+  required: true
+  type: number
+healthmonitor-timeout-optional:
+  <<: *hm-timeout-def
+  required: false
+healthmonitor-type: &hm-type-def
+  description: |
+    Specifies the health check protocol.
+
+    The value can be TCP, UDP_CONNECT, HTTP, HTTPS, or PING.
+  in: body
+  required: true
+  type: string
+healthmonitor-type-optional:
+  <<: *hm-type-def
+  required: false
+healthmonitor-url_path: &hm-url_path-def
+  description: |
+    Specifies the HTTP request path for the health check. The value must start with a slash (/), and the default value is /. This parameter is available only when type is set to HTTP.
+
+    Default: /
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+healthmonitor-url_path-optional:
+  <<: *hm-url_path-def
+  required: false
+healthmonitors:
+  description: |
+    Specifies the health check.
+  in: body
+  required: true
+  type: array
+id:
+  description: |
+    Specifies the resource ID.
+  in: body
+  required: true
+  type: uuid
+l7policies:
+  description: |
+    Lists the forwarding policies.
+  in: body
+  required: true
+  type: array
+l7policy:
+  description: |
+    Object representing the forwarding policy
+  in: body
+  required: true
+  type: object
+l7policy-action:
+  description: |
+    Specifies where requests will be forwarded. The value can be one of the following:
+
+    - REDIRECT_TO_POOL: Requests will be forwarded to another backend server group.
+    - REDIRECT_TO_LISTENER: Requests will be redirected to an HTTPS listener.
+
+    REDIRECT_TO_LISTENER has the highest priority. If requests are to be redirected to an HTTPS listener, other forwarding policies of the listener will become invalid.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+l7policy-description:
+  description: |
+    Provides supplementary information about the forwarding policy.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+l7policy-fixed_response_config:
+  description: |
+    Specifies the configuration of the page that will be returned. This parameter will take effect when enhance_l7policy_enable is set to true. If this parameter is passed and enhance_l7policy_enable is set to false, an error will be returned. For shared load balancers, this parameter is not supported. If it is passed, an error will be returned.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: false
+  type: object
+l7policy-fixed_response_config-content_type:
+  description: |
+    Specifies the format of the response body.
+
+    Value options:
+
+    - text/plain
+    - text/css
+    - text/html
+    - application/javascript
+    - application/json
+
+    Minimum: 0
+    Maximum: 32
+  in: body
+  required: false
+  type: str
+l7policy-fixed_response_config-message_body:
+  description: |
+    Specifies the content of the response body.
+
+    Minimum: 0
+    Maximum: 1024
+  in: body
+  required: false
+  type: str
+l7policy-fixed_response_config-status_code:
+  description: |
+    Specifies the fixed HTTP status code configured in the forwarding rule. The value can be any integer in the range of 200–299, 400–499, or 500–599.
+
+    Minimum: 1
+    Maximum: 16
+  in: body
+  required: true
+  type: str
+l7policy-listener_id:
+  description: |
+    Specifies the ID of the listener to which the forwarding policy is added.
+    If action is set to REDIRECT_TO_POOL, the forwarding policy can be added to an HTTP or HTTPS listener.
+    If action is set to REDIRECT_TO_LISTENER, the forwarding policy can be added to an HTTP listener.
+  in: body
+  required: true
+  type: string
+l7policy-name:
+  description: |
+    Specifies the forwarding policy name.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: false
+  type: string
+l7policy-position:
+  description: |
+    Specifies the forwarding policy priority. The value cannot be updated.
+    This parameter is unsupported. Please do not use it.
+
+    Minimum: 1
+    Maximum: 100
+  in: body
+  required: false
+  type: int
+l7policy-priority:
+  description: |
+    Specifies the forwarding policy priority. This parameter is available only for dedicated load balancers and will take effect when enhance_l7policy_enable is set to true. If this parameter is passed and enhance_l7policy_enable is set to false, an error will be returned. For shared load balancers, this parameter is not supported. If it is passed, an error will be returned.
+    A smaller value indicates a higher priority. The value must be unique for each forwarding policy of the same listener.
+    If action is set to REDIRECT_TO_LISTENER, the value can only be 0, indicating that REDIRECT_TO_LISTENER has the highest priority.
+
+    - If enhance_l7policy_enable is set to false, forwarding policies are automatically prioritized based on the original sorting logic. Forwarding policy priorities are independent of each other regardless of domain names. If forwarding policies use the same domain name, their priorities follow the order of exact match (EQUAL_TO), prefix match (STARTS_WITH), and regular expression match (REGEX). If prefix match is used for matching, the longer the path, the higher the priority. If a forwarding policy contains only a domain name without a path specified, the path is /, and prefix match is used by default.
+
+    - If enhance_l7policy_enable is set to true and this parameter is not passed, the priority will set to a sum of 1 and the highest priority of existing forwarding policy in the same listener by default. There will be two cases: a) If the highest priority of existing forwarding policies is the maximum (10,000), the forwarding policy will fail to create because the final priority for creating the forwarding policy is the sum of 1 and 10,000, which exceeds the maximum. In this case, please specify a value or adjust the priorities of existing forwarding policies. b) If no forwarding policies exist, the highest priority of existing forwarding policies will set to 1 by default.
+
+    This parameter is unsupported. Please do not use it.
+
+    Minimum: 0
+    Maximum: 10000
+  in: body
+  required: false
+  type: int
+l7policy-redirect_listener_id:
+  description: |
+    Specifies the ID of the listener to which requests are redirected. This parameter is mandatory when action is set to REDIRECT_TO_LISTENER.
+    For shared load balancers, this parameter is not supported. If it is passed, an error will be returned.
+  in: body
+  required: false
+  type: uuid
+l7policy-redirect_pool_id:
+  description: |
+    Specifies the ID of the backend server group that requests are forwarded to.
+
+    This parameter is valid and mandatory only when action is set to REDIRECT_TO_POOL. The specified backend server group cannot be the default one associated with the listener, or any backend server group associated with the forwarding policies of other listeners.
+
+    This parameter cannot be specified when action is set to REDIRECT_TO_LISTENER.
+  in: body
+  required: false
+  type: uuid
+l7policy-redirect_url:
+  description: |
+    Specifies the URL to which requests are forwarded.
+
+    Format: protocol://host:port/path?query
+
+    This parameter is unsupported. Please do not use it.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: false
+  type: string
+l7policy-redirect_url_config:
+  description: |
+    Specifies the URL to which requests are forwarded.
+
+    For shared load balancers, this parameter is not supported. If it is passed, an error will be returned.
+
+    For dedicated load balancers, this parameter will take effect only when advanced forwarding is enabled (enhance_l7policy_enable is set to true). If it is passed when enhance_l7policy_enable is set to false, an error will be returned.
+
+    Format: protocol://host:port/path?query
+
+    At least one of the four parameters (protocol, host, port, and path) must be passed, or their values cannot be set to ${xxx} at the same time. (${xxx} indicates that the value in the request will be inherited. For example, ${host} indicates the host in the URL to be redirected.)
+
+    The values of protocol and port cannot be the same as those of the associated listener, and either host or path must be passed or their values cannot be ${xxx} at the same time.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: false
+  type: object
+l7policy-redirect_url_config-host:
+  description: |
+    Specifies the host name that requests are redirected to. The value can contain only letters, digits, hyphens (-), and periods (.) and must start with a letter or digit. The default value is ${host}, indicating that the host of the request will be used.
+
+    Default: ${host}
+    Minimum: 1
+    Maximum: 128
+  in: body
+  required: false
+  type: str
+l7policy-redirect_url_config-path:
+  description: |
+    Specifies the path that requests are redirected to. The default value is ${path}, indicating that the path of the request will be used.
+
+    The value can contain only letters, digits, and special characters _-';@^- %#&$.*+?,=!:\|/()[]{} and must start with a slash (/).
+
+    Default: ${path}
+    Minimum: 1
+    Maximum: 128
+  in: body
+  required: false
+  type: str
+l7policy-redirect_url_config-port:
+  description: |
+    Specifies the port that requests are redirected to. The default value is ${port}, indicating that the port of the request will be used.
+
+    Default: ${port}
+    Minimum: 1
+    Maximum: 16
+  in: body
+  required: false
+  type: str
+l7policy-redirect_url_config-protocol:
+  description: |
+    Specifies the protocol for redirection. The default value is ${protocol}, indicating that the protocol of the request will be used.
+
+    Value options:
+
+    - HTTP
+    - HTTPS
+    - ${protocol}
+
+    Default: ${protocol}
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: false
+  type: str
+l7policy-redirect_url_config-query:
+  description: |
+    Specifies the query string set in the URL for redirection. The default value is ${query}, indicating that the query string of the request will be used.
+
+    For example, in the URL https://www.xxx.com:8080/elb?type=loadbalancer, ${query} indicates type=loadbalancer. If this parameter is set to ${query}&name=my_name, the URL will be redirected to https://www.xxx.com:8080/elb?type=loadbalancer&name=my_name.
+
+    The value is case-sensitive and can contain only letters, digits, and special characters !$&'()*+,-./:;=?@^_`
+
+    Default: ${query}
+    Minimum: 0
+    Maximum: 128
+  in: body
+  required: false
+  type: str
+l7policy-redirect_url_config-status_code:
+  description: |
+    Specifies the status code returned after the requests are redirected.
+
+    Value options:
+
+    - 301
+    - 302
+    - 303
+    - 307
+    - 308
+
+    Minimum: 1
+    Maximum: 16
+  in: body
+  required: true
+  type: str
+l7policy-rules:
+  description: |
+    Lists the forwarding rules in the forwarding policy.
+
+    The list can contain a maximum of 10 forwarding rules (if conditions is specified, a condition is considered as a rule).
+
+    If type is set to HOST_NAME, PATH, METHOD, or SOURCE_IP, only one forwarding rule can be created for each type.
+
+    The entire list will be replaced if you update it.
+  in: body
+  required: false
+  type: array
+l7rule:
+  description: |
+    Specifies the forwarding rule.
+  in: body
+  required: true
+  type: object
+l7rule-admin_state_up:
+  description: |
+    Specifies the administrative status of the forwarding rule. The value can be true or false, and the default value is true.
+
+    This parameter is unsupported. Please do not use it.
+
+    Default: true
+  in: body
+  required: false
+  type: bool
+l7rule-compare_type:
+  description: |
+    Specifies how requests are matched with the domain name or URL.
+
+    If type is set to HOST_NAME, this parameter can only be set to EQUAL_TO (exact match).
+
+    If type is set to PATH, this parameter can be set to REGEX (regular expression match), STARTS_WITH (prefix match), or EQUAL_TO (exact match).
+  in: body
+  required: true
+  type: str
+l7rule-conditions:
+  description: |
+    Specifies the conditions contained in a forwarding rule. This parameter will take effect when enhance_l7policy_enable is set to true.
+
+    If conditions is specified, key and value will not take effect, and the value of this parameter will contain all conditions configured for the forwarding rule. The keys in the list must be the same, whereas each value must be unique.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: false
+  type: array
+l7rule-conditions-key:
+  description: |
+    Specifies the key of match item. This parameter is left blank.
+
+    Minimum: 1
+    Maximum: 128
+  in: body
+  required: no
+  type: str
+l7rule-conditions-value:
+  description: |
+    Specifies the value of the match item.
+
+    If type is set to HOST_NAME, key is left blank, and value indicates the domain name, which can contain 1 to 128 characters, including letters, digits, hyphens (-), periods (.), and asterisks (), and must start with a letter, digit, or asterisk (). If you want to use a wildcard domain name, enter an asterisk (*) as the leftmost label of the domain name.
+
+    If type is set to PATH, key is left blank, and value indicates the request path, which can contain 1 to 128 characters. If compare_type is set to STARTS_WITH or EQUAL_TO for the forwarding rule, the value must start with a slash (/) and can contain only letters, digits, and special characters _~';@^-%#&$.*+?,=!:\|/()[]{}
+  in: body
+  required: true
+  type: str
+l7rule-invert:
+  description: |
+    Specifies whether reverse matching is supported. The value can be true or false, and the default value is false.
+
+    This parameter is unsupported. Please do not use it.
+
+    Default: false
+  in: body
+  required: false
+  type: bool
+l7rule-key:
+  description: |
+    Specifies the key of the match item. For example, if an HTTP header is used for matching, key is the name of the HTTP header parameter.
+
+    This parameter is unsupported. Please do not use it.
+
+    Minimum: 1
+
+    Maximum: 255
+  in: body
+  required: false
+  type: str
+l7rule-type:
+  description: |
+    Specifies the match content. The value can be one of the following:
+
+    HOST_NAME: A domain name will be used for matching.
+
+    PATH: A URL will be used for matching.
+
+    If type is set to HOST_NAME, PATH, METHOD, or SOURCE_IP, only one forwarding rule can be created for each type.
+  in: body
+  required: true
+  type: str
+l7rule-value:
+  description: |
+    Specifies the value of the match item. For example, if a domain name is used for matching, value is the domain name.
+
+    If type is set to HOST_NAME, the value can contain letters, digits, hyphens (-), and periods (.) and must start with a letter or digit. If you want to use a wildcard domain name, enter an asterisk (*) as the leftmost label of the domain name.
+
+    If type is set to PATH and compare_type to STARTS_WITH or EQUAL_TO, the value must start with a slash (/) and can contain only letters, digits, and special characters _~';@^-%#&$.*+?,=!:\|/()[]{}
+
+    Minimum: 1
+
+    Maximum: 128
+  in: body
+  required: true
+  type: str
+l7rules:
+  description: |
+    Lists the forwarding rules.
+  in: body
+  required: true
+  type: array
+listener:
+  description: |
+    Specifies the listener.
+  in: body
+  required: true
+  type: object
+listener-client_ca_tls_container_ref: &lsnr-client_ca_tls-def
+  description: |
+    Specifies the ID of the CA certificate used by the listener.
+
+    Minimum: 1
+    Maximum: 128
+  in: body
+  required: true
+  type: string
+listener-client_ca_tls_container_ref-optional:
+  <<: *lsnr-client_ca_tls-def
+  required: false
+listener-client_timeout: &lsnr-client_timeout-def
+  description: |
+    Specifies the timeout duration for waiting for a request from a client, in seconds.
+
+    This parameter is available only for HTTP and HTTPS listeners. The value ranges from 1 to 300, and the default value is 60.
+
+    An error will be returned if you configure this parameter for TCP and UDP listeners.
+
+    Minimum: 1
+    Maximum: 300
+    Default: 60
+  in: body
+  required: true
+  type: number
+listener-client_timeout-optional:
+  <<: *lsnr-client_timeout-def
+listener-connection_limit:
+  description: |
+    Specifies the maximum number of connections. The default value is -1.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: integer
+listener-default_pool_id: &lsnr-default_pool_id-def
+  description: |
+    Specifies the ID of the default backend server group. If there is no matched forwarding policy, requests are forwarded to the default backend server for processing.
+
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: true
+  type: uuid
+listener-default_pool_id-optional:
+  <<: *lsnr-default_pool_id-def
+  required: false
+listener-default_tls_container_ref: &lsnr-default_tls_container_ref-def
+  description: |
+    Specifies the ID of the server certificate used by the listener.
+
+    Minimum: 1
+    Maximum: 128
+  in: body
+  required: true
+  type: uuid
+listener-default_tls_container_ref-optional:
+  <<: *lsnr-default_tls_container_ref-def
+listener-description: &lsnr-description
+  description: |
+    Provides supplementary information about the listener.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+listener-description-optional:
+  <<: *lsnr-description
+  required: false
+listener-enable_member_retry: &lsnr-enable_member_retry-def
+  description: |
+    Specifies whether to enable health check retries for backend servers.
+
+    This parameter is available only for HTTP and HTTPS listeners.
+
+    An error will be returned if you configure this parameter for TCP and UDP listeners.
+
+    Default: true
+  in: body
+  required: true
+  type: bool
+listener-enable_member_retry-optional:
+  <<: *lsnr-enable_member_retry-def
+  required: false
+listener-enhance_l7policy_enable: &lsnr-enhance-def
+  description: |
+    Specifies whether to enable advanced forwarding. The value can be true or false (default).
+
+    - true indicates that advanced forwarding will be enabled.
+    - false indicates that advanced forwarding will not be enabled.
+
+    The following parameters will be available only when advanced forwarding is enabled:
+
+    - redirect_url_config
+    - fixed_response_config
+    - priority
+    - conditions
+
+    For details, see the descriptions in the APIs of forwarding policies and forwarding rules.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: bool
+listener-enhance_l7policy_enable-optional:
+  <<: *lsnr-enhance-def
+  required: false
+listener-http2_enable: &lsnr-http2_enable-def
+  description: |
+    Specifies whether to use HTTP/2. This parameter is available only for HTTPS listeners. If you configure this parameter for other types of listeners, it will not take effect.
+
+    Enable HTTP/2 if you want the clients to use HTTP/2 to communicate with the load balancer. However, connections between the load balancer and backend servers use HTTP/1.x by default.
+  in: body
+  required: true
+  type: bool
+listener-http2_enable-optional:
+  <<: *lsnr-http2_enable-def
+  required: false
+listener-id: &listener-id-def
+  description: |
+    Specifies the listener ID.
+  in: body
+  required: true
+  type: uuid
+listener-id-optional:
+  <<: *listener-id-def
+  required: false
+listener-insert_headers: &lsnr-insert_headers-def
+  description: |
+    Specifies the HTTP header fields. See :ref:`insert_headers`.
+  in: body
+  required: true
+  type: object
+listener-insert_headers-optional:
+  <<: *lsnr-insert_headers-def
+  required: false
+listener-ipgroup: &lsnr-ipgroup-def
+  description: |
+    Specifies the IP address group associated with the listener.
+
+    The value can be null or an empty JSON structure, indicating that no IP address group is associated with the listener.
+
+    ipgroup_id is also required if you want to associate an IP address group with the listener.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: string
+listener-ipgroup-enable: &lsnr-ipgrp-enable-def
+  description: |
+    Specifies whether to enable access control.
+
+    - true (default): Access control will be enabled.
+    - false: Access control will be disabled.
+
+    A listener with access control enabled can be directly deleted.
+  in: body
+  required: true
+  type: bool
+listener-ipgroup-enable-optional:
+  <<: *lsnr-ipgrp-enable-def
+  required: false
+listener-ipgroup-id:
+  desciption: |
+    Specifies the ID of the IP address group associated with the listener.
+
+    If ip_list is set to [] and type to whitelist, no IP addresses are allowed to access the listener.
+
+    If ip_list is set to [] and type to blacklist, any IP address is allowed to access the listener.
+
+    The specified IP address group must exist and this parameter cannot be set to null.
+
+    IP address groups are not supported for now.
+  in: body
+  required: true
+  type: uuid
+listener-ipgroup-optional:
+  <<: *lsnr-ipgroup-def
+  required: false
+listener-ipgroup-type: &lsnr-ipgrp-type-def
+  description: |
+    Specifies how access to the listener is controlled.
+
+    - white (default): A whitelist will be configured. Only IP addresses in the whitelist can access the listener.
+    - black: A blacklist will be configured. IP addresses in the blacklist are not allowed to access the listener.
+  in: body
+  required: true
+  type: string
+listener-ipgroup-type-optional:
+  <<: *lsnr-ipgrp-type-def
+  required: false
+listener-keepalive_timeout: &lsnr-keepalive_timeout-def
+  description: |
+    Specifies the idle timeout duration, in seconds.
+
+    - For TCP listeners, the value ranges from 10 to 4000, and the default value is 300.
+    - For HTTP and HTTPS listeners, the value ranges from 0 to 4000, and the default value is 60.
+    - For UDP listeners, this parameter is not available. An error will be returned if you configure this parameter for UDP listeners.
+  in: body
+  required: true
+  type: number
+listener-keepalive_timeout-optional:
+  <<: *lsnr-keepalive_timeout-def
+listener-loadbalancer_id:
+  description: |
+    Specifies the ID of the load balancer that the listener is added to.
+
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: true
+  type: uuid
+listener-loadbalancers:
+  description: |
+    Specifies the ID of the load balancer that the listener is added to.
+  in: body
+  required: true
+  type: array
+listener-member_timeout: &lsnr-member_timeout-def
+  description: |
+    Specifies the timeout duration for waiting for a request from a backend server, in seconds.
+
+    This parameter is available only for HTTP and HTTPS listeners. The value ranges from 1 to 300, and the default value is 60.
+
+    An error will be returned if you configure this parameter for TCP and UDP listeners.
+  in: body
+  required: true
+  type: number
+listener-member_timeout-optional:
+  <<: *lsnr-member_timeout-def
+  required: false
+listener-name: &lsnr-name-ref
+  description: |
+    Specifies the listener name.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+listener-name-optional:
+  <<: *lsnr-name-ref
+listener-protocol: &lsnr-protocol-ref
+  description: |
+    Specifies the protocol used by the listener. The protocol can be TCP, HTTP, UDP, or HTTPS.
+  in: body
+  required: true
+  type: string
+listener-protocol_port:
+  description: |
+    Specifies the port used by the listener.
+
+    Minimum: 1
+    Maximum: 65535
+  in: body
+  required: true
+  type: number
+listener-sni_container_refs: &lsnr-sni_container_refs-def
+  description: |
+    Lists the IDs of SNI certificates (server certificates with domain names) used by the listener.
+
+    Each SNI certificate can have up to 30 domain names, and each domain name in the SNI certificate must be unique.
+
+    This parameter will be ignored and an empty array will be returned if the listener's protocol is not HTTPS.
+  in: body
+  required: true
+  type: string
+listener-sni_container_refs-optional:
+  <<: *lsnr-sni_container_refs-def
+listener-tls_ciphers_policy: &lsnr-tlsciphers_policy-def
+  description: |
+    Specifies the security policy that will be used by the listener.
+
+    This parameter is available only for HTTPS listeners. The default value is tls-1-0.
+
+    An error will be returned if the protocol of the listener is not HTTPS.
+
+    Value options:
+    - tls-1-0
+    - tls-1-1
+    - tls-1-2
+    - tls-1-2-strict
+  in: body
+  required: true
+  type: string
+listener-tls_ciphers_policy-optional:
+  <<: *lsnr-tlsciphers_policy-def
+listener-transparent_client_ip_enable: &lsnr-tcie-def
+  description: |
+    Specifies whether to pass source IP addresses of the clients to backend servers.
+
+    Shared load balancers: The value can be true or false, and the default value is false for TCP and UDP listeners. The value can only be true for HTTP and HTTPS listeners. If this parameter is not passed, the default value is true.
+
+    Dedicated load balancers: The value can only be true for all types of listeners. If this parameter is not passed, the default value is true.
+  in: body
+  required: true
+  type: bool
+listener-transparent_client_ip_enable-optional:
+  <<: *lsnr-tcie-def
+  required: true
+listeners:
+  description: |
+    Lists the listeners.
+  in: body
+  required: true
+  type: array
+loadbalancer:
+  description: |
+    Specifies the load balancer.
+  in: body
+  required: true
+  type: object
+loadbalancer-admin_state_up: &lb-asu-def
+  description: |
+    Specifies the administrative status of the load balancer. The value can only be true.
+
+    This parameter is unsupported. Please do not use it.
+    Default: true
+  in: body
+  required: true
+  type: bool
+loadbalancer-admin_state_up-optional:
+  <<: *lb-asu-def
+  required: false
+loadbalancer-availability_zone_list: &lb-azlist-def
+  description: |
+    Specifies the list of AZs where the load balancer can be created. You can query the AZs by calling the API (GET https://{ELB_Endpoint}/v3/{project_id}/elb/availability-zones). Select one or more AZs in the same set.
+  in: body
+  required: true
+  type: array
+loadbalancer-availability_zone_list-optional:
+  <<: *lb-azlist-def
+  required: false
+loadbalancer-description: &lb-description-def
+  description: |
+    Provides supplementary information about the load balancer.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+loadbalancer-description-optional:
+  <<: *lb-description-def
+  required: false
+loadbalancer-elb_virsubnet_ids:
+  description: |
+    Specifies the ID of the subnet on the downstream plane. The ports used by the load balancer dynamically occupy IP addresses in the subnet.
+  in: body
+  required: true
+  type: array
+loadbalancer-frozen_scene:
+  description: |
+    Specifies the scenario where the load balancer is frozen. Use commas to separate multiple scenarios.
+
+    If the value is ARREAR, the load balancer is frozen because your account is in arrears.
+  in: body
+  required: true
+  type: string
+loadbalancer-guaranteed: &lb-guaranteed-def
+  description: |
+    Specifies whether the load balancer is a dedicated load balancer. The value can only be true.
+
+    Default: true
+  in: body
+  required: true
+  type: bool
+loadbalancer-guaranteed-optional:
+  <<: *lb-guaranteed-def
+  required: false
+loadbalancer-id: &loadbalancer-id-def
+  description: |
+    Specifies the load balancer ID.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-id-optional:
+  <<: *loadbalancer-id-def
+  required: false
+loadbalancer-ip_target_enable:
+  description: |
+    Specifies whether to enable cross-VPC backend.
+
+    This parameter is unsupported. Please do not use it.
+    Default: false
+  in: body
+  required: true
+  type: bool
+loadbalancer-ipv6_bandwidth: &lb-ipv6b-def
+  description: |
+    Specifies the ID of the bandwidth. This parameter is available only when you create or update a dedicated load balancer that has an IPv6 address bound.
+
+    If you use a new IPv6 address and specify a shared bandwidth, the IPv6 address will be added to the shared bandwidth.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: object
+loadbalancer-ipv6_bandwidth-id:
+  description: |
+    Specifies the shared bandwidth ID.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-ipv6_bandwidth-optional:
+  <<: *lb-ipv6b-def
+  required: false
+loadbalancer-ipv6_vip_address:
+  description: |
+    Specifies the IPv6 address bound to the load balancer.
+
+    This parameter is unsupported. Please do not use it.
+
+    Default: None
+    Minimum: 1
+    Maximum: 64
+  in: body
+  required: true
+  type: string
+loadbalancer-ipv6_vip_port_id:
+  description: |
+    Specifies the ID of the port bound to the IPv6 address.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: string
+loadbalancer-ipv6_vip_virsubnet_id: &lb-ipv6_vsi-def
+  description: |
+    Specifies the ID of the IPv6 subnet where the load balancer works. You can query id in the response by calling the API (GET https://{VPC_Endpoint}/v1/{project_id}/subnets).
+
+    Note:
+
+    - ipv6_vip_virsubnet_id is required if you want to create a load balancer with a private IPv6 address.
+    - Both ipv6_vip_virsubnet_id and ipv6_bandwidth are required if you want to create a load balancer with a public IPv6 address.
+    - The subnet specified by ipv6_vip_virsubnet_id must be in the VPC specified by vpc_id if you specify both ipv6_vip_virsubnet_id and vpc_id.
+    - IPv6 must be enabled for the subnet where the load balancer works.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: string
+loadbalancer-ipv6_vip_virsubnet_id-optional:
+  <<: *lb-ipv6_vsi-def
+  required: false
+loadbalancer-l4_flavor_id: &lb-l4f-def
+  description: |
+    Specifies the ID of the Layer-4 flavor.
+
+    Specify either l4_flavor_id or l7_flavor_id or both l4_flavor_id and l7_flavor_id when you create a load balancer.
+  in: body
+  required: true
+  type: string
+loadbalancer-l4_flavor_id-optional:
+  <<: *lb-l4f-def
+  required: false
+loadbalancer-l4_scale_flavor_id:
+  description: |
+    Specifies the reserved Layer 4 flavor.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+loadbalancer-l7_flavor_id: &lb-l7f-def
+  description: |
+    Specifies the ID of the Layer-7 flavor.
+
+    Specify either l4_flavor_id or l7_flavor_id or both l4_flavor_id and l7_flavor_id when you create a load balancer.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: uuid
+loadbalancer-l7_flavor_id-optional:
+  <<: *lb-l7f-def
+  required: false
+loadbalancer-l7_scale_flavor_id:
+  description: |
+    Specifies the reserved Layer 7 flavor.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+loadbalancer-listeners:
+  description: |
+    Lists the IDs of listeners added to the load balancer.
+  in: body
+  required: true
+  type: array
+loadbalancer-name: &lb-name-def
+  description: |
+    Specifies the load balancer name.
+
+    Minimum: **0**
+    Maximum: **255**
+  in: body
+  required: true
+  type: string
+loadbalancer-name-optional:
+  <<: *lb-name-def
+  required: false
+loadbalancer-operating_status:
+  description: |
+    Specifies the operating status of the load balancer. The value can only be ONLINE.
+
+    Minimum: 1
+    Maximum: 16
+  in: body
+  required: true
+  type: string
+loadbalancer-pools:
+  description: |
+    Lists the IDs of backend server groups associated with the load balancer.
+  in: body
+  required: true
+  type: array
+loadbalancer-port_id:
+  description: |
+    Specifies the ID of the port bound to the virtual IP address (the value of vip_address) of the load balancer.
+
+    When you create a dedicated load balancer, the system automatically creates a port for the load balancer and associates the port with a default security group. However, security group rules containing the port will not affect traffic to and from the load balancer.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-provider: &lb-provider-def
+  description: |
+    Specifies the provider of the load balancer. The value can only be vlb.
+  in: body
+  required: true
+  type: string
+loadbalancer-provider-optional:
+  <<: *lb-provider-def
+  required: false
+loadbalancer-provisioning_status:
+  description: |
+    Specifies the provisioning status of the load balancer. The value can only be ACTIVE.
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip: &lb-pip
+  description: |
+    Provides information about the new IPv4 EIP that will be bound to the dedicated load balancer during load balancer creation.
+  in: body
+  required: true
+  type: array
+loadbalancer-publicip-address:
+  description: |
+    Specifies the IP address.
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip-bandwidth:
+  description: |
+    Provides supplementary information about the bandwidth.
+  in: body
+  required: true
+  type: object
+loadbalancer-publicip-bandwidth-charge_mode: &lb-pip-b-cm-def
+  description: |
+    Specifies how the bandwidth used by the EIP is billed.
+
+    Currently, the bandwidth can be billed only by traffic.
+
+    This parameter is mandatory if id is set to null.
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip-bandwidth-charge_mode-optional:
+  <<: *lb-pip-b-cm-def
+  required: false
+loadbalancer-publicip-bandwidth-id: &lb-pip-b-id-def
+  description: |
+    Specifies the ID of the shared bandwidth. You can add a load balancer to a shared bandwidth by specifying its ID.
+
+    If you have specified an ID, you do not need to pass other parameters. Even if you pass other parameters, the system will automatically ignore these parameters.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-publicip-bandwidth-id-optional:
+  <<: *lb-pip-b-id-def
+loadbalancer-publicip-bandwidth-name: &lb-pip-b-name-def
+  description: |
+    Specifies the bandwidth name.
+
+    Minimum: 1
+    Maximum: 64
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip-bandwidth-name-optional:
+  <<: *lb-pip-b-name-def
+  required: false
+loadbalancer-publicip-bandwidth-share_type: &lb-pip-b-st-def
+  description: |
+    Specifies the bandwidth type.
+
+    The value options are as follows:
+
+    - PER: indicates dedicated bandwidth.
+    - WHOLE: indicates shared bandwidth.
+
+    This parameter is mandatory when id is set to null. It will be ignored if the value of id is not null.
+  in: body
+  required: true
+  type: number
+loadbalancer-publicip-bandwidth-share_type-optional:
+  <<: *lb-pip-b-st-def
+  required: false
+loadbalancer-publicip-bandwidth-size: &lb-pip-b-size-def
+  description: |
+    Specifies the bandwidth range.
+
+    The default range is 1 Mbit/s to 2,000 Mbit/s. (The specific range may vary depending on the configuration in each region. You can see the available bandwidth range on the management console.)
+
+    Note:
+
+    The minimum increment for bandwidth adjustment varies depending on the bandwidth range. The following are the details:
+
+    - The minimum increment is 1 Mbit/s if the bandwidth range is from 0 Mbit/s to 300 Mbit/s.
+    - The minimum increment is 50 Mbit/s if the bandwidth range is from 300 Mbit/s to 1,000 Mbit/s.
+    - The minimum increment is 500 Mbit/s if the bandwidth is greater than 1,000 Mbit/s.
+
+    This parameter is mandatory if id is set to null.
+
+    Minimum: 0
+    Maximum: 99999
+  in: body
+  required: true
+  type: number
+loadbalancer-publicip-bandwidth-size-optional:
+  <<: *lb-pip-b-size-def
+  required: false
+loadbalancer-publicip-description: &lb-pip-descr-def
+  description: |
+    Provides supplementary information about the IPv4 EIP.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip-description-optional:
+  <<: *lb-pip-descr-def
+  required: false
+loadbalancer-publicip-id:
+  description: |
+    Specifies the EIP ID.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-publicip-ip_version: &lb-pip-ipv-def
+  description: |
+    Specifies the IP address version. The value can be 4 (IPv4) or 6 (IPv6).
+
+    IPv6 is unsupported. The value cannot be 6.
+
+    Default: 4
+  in: body
+  required: true
+  type: integer
+loadbalancer-publicip-ip_version-optional:
+  <<: *lb-pip-ipv-def
+  required: false
+loadbalancer-publicip-network_type: &lb-pip-nt-def
+  description: |
+    Specifies the EIP type. The value can be 5_bgp (default) and 5_mailbgp.
+    NOTE: In eu-de, the value of this parameter can only be 5_gray.
+
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: true
+  type: string
+loadbalancer-publicip-network_type-optional:
+  <<: *lb-pip-nt-def
+  required: false
+loadbalancer-publicip-optional:
+  <<: *lb-pip
+  required: false
+loadbalancer-publicip_ids: &lb-pip_id-ref
+  description: |
+    Specifies the ID of the EIP the system will automatically assign and bind to the load balancer during load balancer creation. Currently, only the first EIP will be bound to the load balancer although multiple EIP IDs can be set.
+  in: body
+  required: true
+  type: array
+loadbalancer-publicip_ids-optional:
+  <<: *lb-pip_id-ref
+  required: false
+loadbalancer-publicips:
+  description: |
+    Specifies the EIP bound to the load balancer.
+  in: body
+  required: true
+  type: array
+loadbalancer-vip_address: &lb-vip_address-def
+  description: |
+    Specifies the virtual IP address bound to the load balancer. The IP address must be from the IPv4 subnet of the VPC where the load balancer works and IP address should not be occupied by other services.
+
+    Note:
+    - If both vip_subnet_cidr_id and vip_address are specified, a dedicated load balancer with a private IPv4 address will be created, and the virtual IP address specified by vip_address is the private IP address of the load balancer.
+    - If only vip_subnet_cidr_id is specified, a dedicated load balancer with a private IPv4 address will be created, and the system will automatically assign a virtual IP address to the load balancer.
+  in: body
+  required: true
+  type: string
+loadbalancer-vip_address-optional:
+  <<: *lb-vip_address-def
+  required: false
+loadbalancer-vip_subnet_cidr_id: &lb-vip_subnet_cidr_id-def
+  description: |
+    Specifies the ID of the IPv4 subnet where the load balancer works. You can query neutron_subnet_id in the response by calling the API (GET https://{VPC_Endpoint}/v1/{project_id}/subnets).
+
+    Both vip_subnet_cidr_id and vip_address are required if you want to create a dedicated load balancer with a private IPv4 address.
+    publicip and either vpc_id or vip_subnet_cidr_id are required if you want to create a dedicated load balancer with a new IPv4 EIP.
+    publicip_ids and either vpc_id or vip_subnet_cidr_id are required if you want to with a dedicated load balancer with an existing IPv4 EIP.
+    The subnet specified by vip_subnet_cidr_id must be in the VPC specified by vpc_id if you specify both vpc_id and vip_subnet_cidr_id.
+  in: body
+  required: true
+  type: string
+loadbalancer-vip_subnet_cidr_id-optional:
+  <<: *lb-vip_subnet_cidr_id-def
+  required: false
+loadbalancer-vpc_id: &lb-vpc_id-def
+  description: |
+    Specifies the ID of the VPC where the load balancer works. You can query id in the response by calling the API (GET https://{VPC_Endpoint}/v1/{project_id}/vpcs).
+
+    The subnet specified by vip_subnet_cidr_id must be in the VPC specified by vpc_id if you specify both vip_subnet_cidr_id and vpc_id.
+    The subnet specified by ipv6_vip_virsubnet_id must be in the VPC specified by vpc_id if you specify both ipv6_vip_virsubnet_id and vpc_id.
+  in: body
+  required: true
+  type: uuid
+loadbalancer-vpc_id-optional:
+  <<: *lb-vpc_id-def
+  required: false
+loadbalancers:
+  description: |
+    Lists the load balancers.
+  in: body
+  required: true
+  type: array
+member:
+  description: |
+    Specifies the backend server.
+  in: body
+  required: true
+  type: object
+member-address: &member-address-def
+  description: |
+    Specifies the IP address of the backend server.
+
+    The IP address must be in the subnet specified by subnet_cidr_id, for example, 192.168.3.11.
+
+    The IP address can only be the IP address of the primary NIC.
+
+    If subnet_cidr_id is left blank, cross-VPC backend is enabled. In this case, these servers must use IPv4 addresses.
+
+    Minimum: 1
+    Maximum: 64
+  in: body
+  required: true
+  type: string
+member-address-optional:
+  <<: *member-address-def
+  required: false
+member-admin_state_up: &member-admin_state_up-def
+  description: |
+    Specifies the administrative status of the backend server.
+
+    Although this parameter can be used in the APIs for creating and updating backend servers, its actual value depends on whether cloud servers exist. If cloud servers exist, the value is true. Otherwise, the value is false.
+  in: body
+  required: true
+  type: bool
+member-admin_state_up-optional:
+  <<: *member-admin_state_up-def
+  required: false
+member-id:
+  description: |
+    Specifies the backend server ID.
+  in: body
+  required: true
+  type: uuid
+member-ip_version: &member-ip_version-def
+  description: |
+    This is a read-only attribute, which is automatically generated based on the address parameter. The value can be v4 or v6.
+
+    Default: v4
+  in: body
+  required: true
+  type: string
+member-ip_version-optional:
+  <<: *member-ip_version-def
+  required: false
+member-name: &member-name-def
+  description: |
+    Specifies the backend server name.
+  in: body
+  required: true
+  type: string
+member-name-optional:
+  <<: *member-name-def
+  required: false
+member-operating_status: &member-operating_status-def
+  description: |
+    Specifies the operating status of the backend server. The value can be one of the following:
+
+    - ONLINE: The backend server is running normally.
+    - NO_MONITOR: No health check is configured for the backend server group to which the backend server belongs.
+    - OFFLINE: The cloud server used as the backend server is stopped or does not exist.
+  in: body
+  required: true
+  type: string
+member-operating_status-optional:
+  <<: *member-operating_status-def
+  required: false
+member-protocol_port: &member-protocol_port-def
+  description: |
+    Specifies the port used by the backend server to receive requests.
+
+    Minimum: 1
+    Maximum: 65535
+  in: body
+  required: true
+  type: number
+member-protocol_port-optional:
+  <<: *member-protocol_port-def
+  required: false
+member-subnet_cidr_id: &member-subnet_cidr_id-def
+  description: |
+    Specifies the ID of the subnet where the backend server works. This subnet must be in the VPC as the subnet of the load balancer associated with the backend server. Only IPv4 subnets are supported. If the value is left blank, the backend server is not in the load balancer's VPC.
+  in: body
+  required: true
+  type: string
+member-subnet_cidr_id-optional:
+  <<: *member-subnet_cidr_id-def
+  required: false
+member-weight: &member-weight-def
+  description: |
+    Specifies the weight of the backend server.
+
+    Requests are routed to backend servers in the same backend server group based on their weights.
+
+    If the weight is 0, the backend server will not accept new requests.
+
+    This parameter is invalid when lb_algorithm is set to SOURCE_IP for the backend server group that contains the backend server.
+
+    Minimum: 0
+    Maximum: 100
+    Default: 1
+  in: body
+  required: true
+  type: number
+member-weight-optional:
+  <<: *member-weight-def
+  required: false
+members:
+  description:  |
+    Lists the backend servers.
+  in: body
+  required: true
+  type: array
+name:
+  description: |
+    Resource name
+  in: body
+  required: true
+  type: string
+operating_status:
+  description: |
+    Operating status of the resource. See :ref:`op_status`
+  in: body
+  required: true
+  type: string
+page_info:
   description: |
     Shows pagination information
   in: body
   type: array
+  required: true
+pool:
+  description: |
+    Specifies the backend server group.
+  in: body
+  required: true
+  type: object
+pool-description: &pool-description-def
+  description: |
+    Provides supplementary information about the backend server group.
+  in: body
+  required: true
+  type: string
+pool-description-optional:
+  <<: *pool-description-def
   required: false
-project-id:
+pool-healthmonitor_id: &pool-hm_id-def
+  description: |
+    Specifies the ID of the health check configured for the backend server group.
+  in: body
+  required: true
+  type: uuid
+pool-id:
+  description: |
+    Specifies the backend server group ID.
+  in: body
+  required: true
+  type: uuid
+pool-ip_version:
+  description: |
+    Specifies the IP version supported by the backend server group.
+
+    Shared load balancers: The default value is v4.
+    Dedicated load balancers: The value can be dualstack, v4, or v6.
+
+    When the protocol of the backend server group is TCP or UDP, ip_version is set to dualstack, indicating that both IPv4 and IPv6 are supported.
+
+    When the protocol of the backend server group is HTTP, ip_version is set to v4.
+
+    IPv6 is unsupported. Only v4 is returned.
+
+    Default: dualstack
+  in: body
+  required: true
+  type: string
+pool-lb_algorithm: &pool-lbalgo-def
+  description: |
+    Specifies the load balancing algorithm used by the load balancer to route requests to backend servers.
+
+    The value can be one of the following:
+
+    - ROUND_ROBIN: weighted round robin
+    - LEAST_CONNECTIONS: weighted least connections
+    - SOURCE_IP: source IP hash
+
+    When the value is SOURCE_IP, the weights of backend servers are invalid.
+  in: body
+  required: true
+  type: string
+pool-listener_id: &pool-listener_id-def
+  description: |
+    Specifies the ID of the listener associated with the backend server group. Specify either listener_id or loadbalancer_id, or both of them.
+
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: true
+  type: uuid
+pool-listener_id-optional:
+  <<: *pool-listener_id-def
+  required: false
+pool-listeners:
+  description: |
+    Lists the listeners associated with the backend server group.
+  in: body
+  required: true
+  type: array
+pool-loadbalancer_id: &pool-lbid-def
+  description: |
+    Specifies the ID of the associated load balancer. Specify either listener_id or loadbalancer_id, or both of them.
+
+    Minimum: 1
+    Maximum: 36
+  in: body
+  required: true
+  type: uuid
+pool-loadbalancer_id-optional:
+  <<: *pool-lbid-def
+  required: false
+pool-loadbalancers:
+  description: |
+    Lists the IDs of load balancers associated with the backend server group.
+
+    If only listener_id is specified during the creation of the backend server group, the ID of the loadbalancers parameter in the response is the ID of the load balancer to which the listener is added.
+  in: body
+  required: true
+  type: array
+pool-members:
+  description: |
+    Lists the backend servers in the backend server group.
+  in: body
+  required: true
+  type: array
+pool-name: &pool-name-def
+  description: |
+    Specifies the backend server group name.
+
+    Minimum: 0
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+pool-name-optional:
+  <<: *pool-name-def
+  required: false
+pool-protocol: &pool-protocol-def
+  description: |
+    Specifies the protocol used by the backend server group to receive requests. TCP, UDP, and HTTP are supported.
+
+    For UDP listeners, the protocol of the backend server group must be UDP.
+
+    For TCP listeners, the protocol of the backend server group must be TCP.
+
+    For HTTP or HTTPS listeners, the protocol of the backend server group must be HTTP.
+
+    Minimum: 1
+    Maximum: 255
+  in: body
+  required: true
+  type: string
+pool-session_persistence: &pool-sp-def
+  description: Specifies whether to enable sticky sessions.
+  in: body
+  required: true
+  type: object
+pool-session_persistence-cookie_name: &pool-ss-cn-def
+  description: |
+    Specifies the cookie name. This parameter will take effect only when type is set to APP_COOKIE. Otherwise, an error will be returned.
+
+    The value can contain only letters, digits, hyphens (-), underscores (_), and periods (.).
+
+    Minimum: 0
+    Maximum: 1024
+  in: body
+  required: true
+  type: string
+pool-session_persistence-cookie_name-optional:
+  <<: *pool-ss-cn-def
+  required: false
+pool-session_persistence-optional:
+  <<: *pool-sp-def
+  required: false
+pool-session_persistence-timeout: &pool-ss-timeout-def
+  description: |
+    Specifies the stickiness duration, in minutes. This parameter will not take effect when type is set to APP_COOKIE.
+
+    If the protocol of the backend server group is TCP or UDP, the value ranges from 1 to 60, and the default value is 1.
+
+    If the protocol of the backend server group is HTTP or HTTPS, the value ranges from 1 to 1440, and the default value is 1440.
+  in: body
+  required: true
+  type: number
+pool-session_persistence-timeout-optional:
+  <<: *pool-ss-timeout-def
+  required: false
+pool-session_persistence-type: &pool-ss-type-def
+  description: |
+    Specifies the sticky session type. The value can be SOURCE_IP, HTTP_COOKIE, or APP_COOKIE.
+
+    If the protocol of the backend server group is TCP or UDP, only SOURCE_IP takes effect.
+
+    For dedicated load balancers, if the protocol of the backend server group is HTTP or HTTPS, the value can only be HTTP_COOKIE.
+
+    For shared load balancers, if the protocol of the backend server group is HTTP or HTTPS, the value can be HTTP_COOKIE or APP_COOKIE.
+  in: body
+  required: true
+  type: string
+pool-slow_start: &pool-ss-def
+  description: |
+    Specifies whether to enable slow start. After you enable slow start, new backend servers added to the backend server group are warmed up, and the number of requests they can receive increases linearly during the configured slow start duration.
+
+    This parameter can be used when the protocol of the backend server group is HTTP or HTTPS. An error will be returned if the protocol is not HTTP or HTTPS.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: object
+pool-slow_start-duration:
+  description: |
+    Specifies the slow start duration, in seconds.
+
+    The value ranges from 30 to 1200, and the default value is 30.
+
+    Minimum: 30
+    Maximum: 1200
+    Default: 30
+  in: body
+  required: true
+  type: number
+pool-slow_start-enable:
+  description: |
+    Specifies whether to enable slow start.
+
+    true indicates that this function is enabled, and false indicates this function is disabled.
+
+    Default: false
+  in: body
+  required: true
+  type: bool
+pool-slow_start-optional:
+  <<: *pool-ss-def
+  required: false
+pools:
+  description: |
+    Lists the backend server groups.
+  in: body
+  required: true
+  type: array
+project_id: &project_id-def
   description: |
     Specifies the project ID.
   in: body
   required: true
   type: uuid
-request-id:
+project_id-optional:
+  <<: *project_id-def
+  required: false
+quota-certificate:
+  description: |
+    Specifies the certificate quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-healthmonitor:
+  description: |
+    Specifies the health check quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-ipgroup:
+  description: |
+    Specifies the IP address group quota. -1 indicates that the quota is not limited.
+
+    This parameter is unsupported. Please do not use it.
+  in: body
+  required: true
+  type: number
+quota-l7policy:
+  description: |
+    Specifies the forwarding policy quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-listener:
+  description: |
+    Specifies the listener quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-loadbalancer:
+  description: |
+    Specifies the load balancer quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-member:
+  description: |
+    Specifies the backend server quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-members_per_pool:
+  description: |
+    Specifies the quota of backend servers in a backend server group. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+quota-pool:
+  description: |
+    Specifies the backend server group quota. -1 indicates that the quota is not limited.
+  in: body
+  required: true
+  type: number
+request_id:
   description: |
     Specifies the request ID. The value is automatically generated.
   in: body
   type: string
   required: true
+statuses:
+  description: |
+    Provides information about the load balancer status tree.
+  in: body
+  required: true
+  type: object
+tag-key:
+  description: Specifies the tag key.
+  in: body
+  required: true
+  type: string
+tag-value:
+  description: Specifies the tag value.
+  in: body
+  required: true
+  type: string
+tags: &tags
+  description: |
+    Lists the tags.
+    Example: "tags":[{"key":"my_tag","value":"my_tag_value"}]
+  in: body
+  required: true
+  type: array
+tags-optional:
+  <<: *tags
+  required: false
+type:
+  description: |
+    The type associated with the resource.
+  in: body
+  required: true
+  type: string
+updated_at:
+  description: |
+    Specifies when the resource was updated.
+  in: body
+  required: true
+  type: string
