@@ -28,61 +28,61 @@ ELB supports the following policies:
    +---------------------------------------------------+----------------+--------------------+-------------------+
    | Operation                                         | ELB FullAccess | ELB ReadOnlyAccess | ELB Administrator |
    +===================================================+================+====================+===================+
-   | Creating a load balancer                          | Supported      | Not supported      | Supported         |
+   | Creating a load balancer                          | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a load balancer                          | Supported      | Supported          | Supported         |
+   | Querying a load balancer                          | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a load balancer and associated resources | Supported      | Supported          | Supported         |
+   | Querying a load balancer and associated resources | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying load balancers                           | Supported      | Supported          | Supported         |
+   | Querying load balancers                           | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Modifying a load balancer                         | Supported      | Not supported      | Supported         |
+   | Modifying a load balancer                         | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Deleting a load balancer                          | Supported      | Not supported      | Supported         |
+   | Deleting a load balancer                          | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Adding a listener                                 | Supported      | Not supported      | Supported         |
+   | Adding a listener                                 | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a listener                               | Supported      | Supported          | Supported         |
+   | Querying a listener                               | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Modifying a listener                              | Supported      | Not supported      | Supported         |
+   | Modifying a listener                              | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Deleting a listener                               | Supported      | Not supported      | Supported         |
+   | Deleting a listener                               | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Adding a backend server group                     | Supported      | Not supported      | Supported         |
+   | Adding a backend server group                     | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a backend server group                   | Supported      | Supported          | Supported         |
+   | Querying a backend server group                   | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Modifying a backend server group                  | Supported      | Not supported      | Supported         |
+   | Modifying a backend server group                  | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Deleting a backend server group                   | Supported      | Not supported      | Supported         |
+   | Deleting a backend server group                   | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Adding a backend server                           | Supported      | Not supported      | Supported         |
+   | Adding a backend server                           | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a backend server                         | Supported      | Supported          | Supported         |
+   | Querying a backend server                         | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Modifying a backend server                        | Supported      | Not supported      | Supported         |
+   | Modifying a backend server                        | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Deleting a backend server                         | Supported      | Not supported      | Supported         |
+   | Deleting a backend server                         | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Configuring a health check                        | Supported      | Not supported      | Supported         |
+   | Configuring a health check                        | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying a health check                           | Supported      | Supported          | Supported         |
+   | Querying a health check                           | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Modifying a health check                          | Supported      | Not supported      | Supported         |
+   | Modifying a health check                          | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Disabling a health check                          | Supported      | Not supported      | Supported         |
+   | Disabling a health check                          | Y              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Assigning an EIP                                  | Not supported  | Not supported      | Supported         |
+   | Assigning an EIP                                  | x              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Binding an EIP to a load balancer                 | Not supported  | Not supported      | Supported         |
+   | Binding an EIP to a load balancer                 | x              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Querying an EIP                                   | Supported      | Supported          | Supported         |
+   | Querying an EIP                                   | Y              | Y                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Unbinding an EIP from a load balancer             | Not supported  | Not supported      | Supported         |
+   | Unbinding an EIP from a load balancer             | x              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Viewing metrics                                   | Not supported  | Not supported      | Supported         |
+   | Viewing metrics                                   | x              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
-   | Viewing access logs                               | Not supported  | Not supported      | Supported         |
+   | Viewing access logs                               | x              | x                  | Y                 |
    +---------------------------------------------------+----------------+--------------------+-------------------+
 
 For details about fine-grained permissions, see the *Elastic Load Balance API Reference*.

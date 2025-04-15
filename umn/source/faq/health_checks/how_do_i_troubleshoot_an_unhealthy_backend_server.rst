@@ -130,8 +130,8 @@ Checking the Health Check Configuration
 
 For a dedicated or shared load balancer, click the name of the load balancer to view its details. Navigate to **Backend Server Groups** and then click the name of the server group. In the **Basic Information** area, to the right of **Health Check**, click **Configure**. Check the following parameters:
 
--  **Heath Check Protocol**: The protocol used for health checks.
--  **Heath Check Port**: The port must be the one used on the backend server, and it cannot be changed. Check whether the health check port is in the listening state on the backend server. If the health check port is not in the listening state on the backend server, the backend server will be identified as unhealthy.
+-  **Health Check Protocol**: The protocol used for health checks.
+-  **Health Check Port**: The port must be the one used on the backend server, and it cannot be changed. Check whether the health check port is in the listening state on the backend server. If the health check port is not in the listening state on the backend server, the backend server will be identified as unhealthy.
 -  **Path**: If HTTP is used for health checks, you must check this parameter. A simple static HTML file is recommended.
 
 .. note::
