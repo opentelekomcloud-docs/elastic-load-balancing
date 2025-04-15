@@ -22,15 +22,15 @@ ELB Components
 
 ELB consists of the following components:
 
--  Load balancer: distributes incoming traffic across backend servers in one or more availability zones (AZs).
+-  A load balancer distributes incoming traffic across multiple backend servers in one or more AZs.
 
--  Listener: uses the protocol and port you specify to check for requests from clients and route the requests to associated backend servers based on the listening rules and forwarding policies you configure. You can add one or more listeners to a load balancer.
+-  A listener uses the protocol and port you specify to check requests from clients and route the requests to associated backend servers based on the routing policies and forwarding policies you configure. You can add one or more listeners to a load balancer.
 
--  Backend server group: contains one or more backend servers to receive requests routed by the listener. You need to add at least one backend server to a backend server group.
+-  A backend server group uses the protocol and port you specify to receive the requests from the load balancer and route them to one or more backend servers. You need to add at least one backend server to a backend server group.
 
    You can set a weight for each backend server based on their performance.
 
-   You can also configure health checks for a backend server group to check the health of each backend server. When a backend server is unhealthy, the load balancer stops routing new requests to this server.
+   You can also configure health checks for a backend server group to check the health of each backend server. When a backend server is unhealthy, the load balancer stops routing new requests to it.
 
 
 .. figure:: /_static/images/en-us_image_0000001794820049.png
@@ -41,7 +41,7 @@ ELB consists of the following components:
 Load Balancer Types
 -------------------
 
-ELB provides shared load balancers and dedicated load balancers.
+ELB provides dedicated load balancers and shared load balancers.
 
 
 .. figure:: /_static/images/en-us_image_0000001794660965.png
@@ -56,7 +56,7 @@ ELB provides shared load balancers and dedicated load balancers.
    -  In the eu-de region, you can create both dedicated and shared load balancers, and you can create either type of load balancers on the management console or by calling APIs.
    -  In the eu-nl region, you can only create dedicated load balancers, either on the console or by calling APIs.
 
--  Shared load balancers are deployed in clusters and share underlying resources, so that the performance of a load balancer is affected by other load balancers. Shared load balancers were previously named enhanced load balancers.
+-  Shared load balancers are deployed in clusters. They share underlying resources, so the performance of a load balancer is affected by other load balancers. Shared load balancers were previously named enhanced load balancers.
 
 For details about the differences between dedicated and shared load balancers, see :ref:`Differences Between Dedicated and Shared Load Balancers <elb_pro_0004>`.
 

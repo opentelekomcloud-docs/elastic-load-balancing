@@ -27,7 +27,7 @@ If you enable **Transfer Client IP Address**, your load balancer will use the IP
 Constraints
 -----------
 
--  If you enable **Transfer Client IP Address**, a server cannot be used as both the client and the backend server.
+-  If you enable **Transfer Client IP Address**, a server cannot serve as both a backend server and a client.
 
    If the client and the backend server are using the same server and the **Transfer Client IP Address** option is enabled, the backend server will think the packet is sent by itself but not from the client and will not return a response packet to the load balancer. As a result, the return traffic will be interrupted.
 

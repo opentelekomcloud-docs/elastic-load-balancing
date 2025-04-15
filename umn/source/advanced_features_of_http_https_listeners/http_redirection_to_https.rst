@@ -29,7 +29,7 @@ Creating Redirection to HTTPS
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image1| and select the desired region and project.
-#. Hover on |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. Click **Listeners**, locate the HTTP listener, and click its name.
 #. On the **Forwarding Policies** tab page, click **Add Forwarding Policy**.
@@ -55,7 +55,7 @@ Modifying Redirection to HTTPS
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image3| and select the desired region and project.
-#. Hover on |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. Click **Listeners**, locate the HTTP listener, and click its name.
 #. On the **Forwarding Policies** tab page, click **Edit**.
@@ -67,7 +67,7 @@ Deleting Redirection to HTTPS
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image5| and select the desired region and project.
-#. Hover on |image6| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image6| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. Click **Listeners**, locate the listener, and click its name.
 #. On the **Forwarding Policies** tab page, click **Delete** on the right of the target forwarding policy.

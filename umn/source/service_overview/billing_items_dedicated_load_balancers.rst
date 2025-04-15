@@ -16,21 +16,21 @@ For details about the prices of billing items, see the pricing details on the cr
 
 .. table:: **Table 1** Billing items
 
-   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------+
-   | Billing Item    | Description                                                                                                                                                                                                                      | Billing Mode    | Formula                                                     |
-   +=================+==================================================================================================================================================================================================================================+=================+=============================================================+
-   | LCU             | You are charged based on **the number of LCUs used by a load balancer per hour**.                                                                                                                                                | Pay-per-use     | **Unit price** x **Number of LCUs** x **Required duration** |
-   |                 |                                                                                                                                                                                                                                  |                 |                                                             |
-   |                 | An LCU measures the dimensions on which a dedicated load balancer routes the traffic. See LCU prices in LCU Pricing.                                                                                                             |                 |                                                             |
-   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------+
-   | Load Balancer   | You are charged for **how long a dedicated load balancer is retained in your account**. If the load balancer is retained in your account for less than 1 hour, you will be charged for the actual duration, accurate to seconds. | Pay-per-use     | **Unit price x Required duration**                          |
-   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------------------------------+
+   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
+   | Billing Item    | Description                                                                                                                                                                                                                      | Billing Mode    | Billing Formula                     |
+   +=================+==================================================================================================================================================================================================================================+=================+=====================================+
+   | LCU             | You are charged based on **the number of LCUs used by a load balancer**.                                                                                                                                                         | Pay-per-use     | **Unit price** x **Number of LCUs** |
+   |                 |                                                                                                                                                                                                                                  |                 |                                     |
+   |                 | An LCU measures the dimensions on which a dedicated load balancer routes the traffic. See LCU prices in LCU Pricing.                                                                                                             |                 |                                     |
+   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
+   | Load balancer   | You are charged for **how long a dedicated load balancer is retained in your account**. If the load balancer is retained in your account for less than 1 hour, you will be charged for the actual duration, accurate to seconds. | Pay-per-use     | **Unit price x Required duration**  |
+   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
 
 The billing items of dedicated load balancers vary by specification type. For details, see :ref:`Table 2 <elb_billing_0003__en-us_topic_0000001819164006_table2032117912396>`.
 
 .. _elb_billing_0003__en-us_topic_0000001819164006_table2032117912396:
 
-.. table:: **Table 2** Varied billing items by billing mode
+.. table:: **Table 2** Billing items
 
    ============ ============== === =============
    Billing Mode Specifications LCU Load Balancer
@@ -49,7 +49,7 @@ LCU Pricing
 
 An LCU measures the dimensions on which a dedicated load balancer routes the traffic. See LCU price in :ref:`Table 3 <elb_billing_0003__en-us_topic_0000001819164006_en-us_topic_0000001504522410_table54298422029>`.
 
-The unit price of LCU varies depending on the billing mode and specifications. See the actual price of LCU on the console. **LCU price = Unit price x Number of LCUs x Required duration**.
+The unit price of LCU varies depending on the specifications. See the actual price of LCU on the console. **LCU price = Unit price x Number of LCUs**.
 
 .. _elb_billing_0003__en-us_topic_0000001819164006_en-us_topic_0000001504522410_table54298422029:
 
@@ -110,9 +110,9 @@ You can calculate the number of LCUs by taking the maximum LCUs consumed across 
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+
    | Protocol   | New Connections per Second | Maximum Concurrent Connections per Minute | Processed Bytes | Rule Evaluations per Second |
    +============+============================+===========================================+=================+=============================+
-   | TCP        | 800                        | 100,000                                   | 1 GB            | N/A                         |
+   | TCP        | 800                        | 100,000                                   | 1 GB            | ``-``                       |
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+
-   | UDP        | 400                        | 50,000                                    | 1 GB            | N/A                         |
+   | UDP        | 400                        | 50,000                                    | 1 GB            | ``-``                       |
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+
    | HTTP/HTTPS | 25                         | 3,000                                     | 1 GB            | 1,000                       |
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+

@@ -21,7 +21,7 @@ Enabling the Function
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image1| and select the desired region and project.
-#. Hover on |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. Under **Listeners**, click **Add Listener**.
 #. In the **Add Listener** dialog box, expand **Advanced Settings** and enable the function.
@@ -36,7 +36,7 @@ Disabling the Function
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image3| and select the desired region and project.
-#. Hover on |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. On the **Listeners** tab page, locate the listener, click |image5| next to the listener name, and select **Modify Listener**.
 #. In the **Modify Listener** dialog box, expand **Advanced Settings** and disable the function.

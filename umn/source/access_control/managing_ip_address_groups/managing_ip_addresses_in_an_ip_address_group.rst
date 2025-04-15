@@ -29,7 +29,7 @@ After an IP address group is created, you can add IP addresses to an IP address 
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image1| and select the desired region and project.
-#. Hover on |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. In the navigation pane on the left, choose **Elastic Load Balance** > **IP Address Groups**.
 #. On the **IP Address Groups** page, click the name of the target address group.
 #. In the lower part of the displayed page, choose **IP Addresses** tab and click **Add IP Addresses**.
@@ -45,7 +45,7 @@ You can perform the following steps to change all IP addresses in an IP address 
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image3| and select the desired region and project.
-#. Hover on |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. In the navigation pane on the left, choose **Elastic Load Balance** > **IP Address Groups**.
 #. On the **IP Address Groups** page, you can:
 
@@ -75,7 +75,7 @@ To delete an IP address from an IP address group, perform the following operatio
 
 #. In the upper left corner of the page, click |image5| and select the desired region and project.
 
-#. Hover on |image6| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image6| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 
 #. In the navigation pane on the left, choose **Elastic Load Balance** > **IP Address Groups**.
 

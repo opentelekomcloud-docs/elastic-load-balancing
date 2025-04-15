@@ -17,7 +17,7 @@ Adding to an IPv6 Shared Bandwidth
 
 #. In the upper left corner of the page, click |image1| and select the desired region and project.
 
-#. Hover on |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 
 #. On the **Load Balancers** page, locate the load balancer that you want to add to a shared bandwidth, and click **More** > **Add to IPv6 Shared Bandwidth** in the **Operation** column.
 
@@ -32,7 +32,7 @@ Removing from an IPv6 Shared Bandwidth
 
 #. Log in to the management console.
 #. In the upper left corner of the page, click |image3| and select the desired region and project.
-#. Hover on |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. On the **Load Balancers** page, locate the load balancer that you want to remove from a shared bandwidth, and click **More** > **Remove from IPv6 Shared Bandwidth** in the **Operation** column.
 #. In the displayed dialog box, confirm the shared bandwidth from which you want to remove the load balancer.
 
