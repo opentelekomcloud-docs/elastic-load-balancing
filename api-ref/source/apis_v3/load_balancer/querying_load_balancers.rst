@@ -251,6 +251,14 @@ GET /v3/{project_id}/elb/loadbalancers
    |                            |                 |                   |                                                                                                                                                                                                                                  |
    |                            |                 |                   | "dualstack" is not supported.                                                                                                                                                                                                    |
    +----------------------------+-----------------+-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | protection_status          | No              | Array of strings  | Specifies the protection status.                                                                                                                                                                                                 |
+   |                            |                 |                   |                                                                                                                                                                                                                                  |
+   |                            |                 |                   | Value options:                                                                                                                                                                                                                   |
+   |                            |                 |                   |                                                                                                                                                                                                                                  |
+   |                            |                 |                   | -  **nonProtection** (default): The load balancer is not protected.                                                                                                                                                              |
+   |                            |                 |                   |                                                                                                                                                                                                                                  |
+   |                            |                 |                   | -  **consoleProtection**: **Modification Protection** is enabled on the console.                                                                                                                                                 |
+   +----------------------------+-----------------+-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Request Parameters
 ------------------
@@ -455,6 +463,22 @@ Response Parameters
    |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
    |                            |                                                                                 | -  **lcu**: billed by how many LCUs you have used.                                                                                                                                                                                                                                      |
    +----------------------------+---------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | protection_status          | String                                                                          | Specifies the protection status.                                                                                                                                                                                                                                                        |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | Value options:                                                                                                                                                                                                                                                                          |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | -  **nonProtection** (default): The load balancer is not protected.                                                                                                                                                                                                                     |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | -  **consoleProtection**: **Modification Protection** is enabled on the console.                                                                                                                                                                                                        |
+   +----------------------------+---------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | protection_reason          | String                                                                          | Specifies why the modification protection is enabled.                                                                                                                                                                                                                                   |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | Note: This parameter is valid only when **protection_status** is set to **consoleProtection**. The value can contain a maximum of 255 Unicode characters, excluding angle brackets (<>).                                                                                                |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | Minimum: **0**                                                                                                                                                                                                                                                                          |
+   |                            |                                                                                 |                                                                                                                                                                                                                                                                                         |
+   |                            |                                                                                 | Maximum: **255**                                                                                                                                                                                                                                                                        |
+   +----------------------------+---------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _listloadbalancers__response_poolref:
 
@@ -615,7 +639,9 @@ Successful request.
        "vip_subnet_cidr_id" : "96e52038-7983-462f-8a96-415d8a280b13",
        "deletion_protection_enable" : false,
        "public_border_group" : "center",
-       "waf_failure_action" : "forward"
+       "waf_failure_action" : "forward",
+       "protection_status" : "nonProtection",
+       "protection_reason" : ""
      }, {
        "id" : "cce5318e-c79a-4f68-94a2-9fb285c6efbe",
        "project_id" : "057ef081eb00d2732fd1c01a9be75e6f",
@@ -665,7 +691,9 @@ Successful request.
        "vip_subnet_cidr_id" : null,
        "deletion_protection_enable" : false,
        "public_border_group" : "center",
-       "waf_failure_action" : "forward"
+       "waf_failure_action" : "forward",
+       "protection_status" : "nonProtection",
+       "protection_reason" : ""
      } ],
      "page_info" : {
        "next_marker" : "cce5318e-c79a-4f68-94a2-9fb285c6efbe",

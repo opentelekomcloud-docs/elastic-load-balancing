@@ -50,6 +50,10 @@ Request Parameters
 Response Parameters
 -------------------
 
+**Status code: 204**
+
+Successful request.
+
 None
 
 Example Requests
