@@ -352,18 +352,11 @@ Successful request.
 Status Codes
 ------------
 
-=========== ===========================================
+=========== ===================
 Status Code Description
-=========== ===========================================
+=========== ===================
 200         Successful request.
-400         Invalid request body or request parameters.
-403         Failed to verify the token.
-404         The queried resource does not exist.
-409         A conflict occurred.
-431         The request headers are too large.
-494         The request header or cookie is too large.
-500         A service error occurred.
-=========== ===========================================
+=========== ===================
 
 Error Codes
 -----------
