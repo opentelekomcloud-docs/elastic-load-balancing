@@ -9,6 +9,7 @@ Backend Server Group
 -  :ref:`Key Functions <elb_ug_hdg_0002>`
 -  :ref:`Creating a Backend Server Group (Dedicated Load Balancers) <elb_ug_hdg_0003>`
 -  :ref:`Creating a Backend Server Group (Shared Load Balancers) <elb_ug_hdg_0004>`
+-  :ref:`Enabling Modification Protection <elb_ug_hdg_0009>`
 -  :ref:`Enabling Removal Protection for a Backend Server Group <elb_ug_hd_0004>`
 -  :ref:`Modifying a Backend Server Group <elb_ug_hdg_0005>`
 -  :ref:`Changing a Backend Server Group <elb_ug_hdg_0006>`
@@ -23,6 +24,7 @@ Backend Server Group
    key_functions/index
    creating_a_backend_server_group_dedicated_load_balancers
    creating_a_backend_server_group_shared_load_balancers
+   enabling_modification_protection
    enabling_removal_protection_for_a_backend_server_group
    modifying_a_backend_server_group/index
    changing_a_backend_server_group

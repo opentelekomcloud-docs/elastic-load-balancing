@@ -16,17 +16,36 @@ Deleted listeners cannot be recovered.
 
    **Frontend Protocol/Port** and **Backend Protocol** cannot be modified after you have configured them. If you want to modify the protocol or port of the listener, add another listener to the load balancer.
 
-Modifying a listener
+.. _elb_ug_jt_0012__section15640254181819:
+
+Configuring Modification Protection for a Listener
+--------------------------------------------------
+
+You can enable modification protection for a listener to prevent it from being modified or deleted by accident.
+
+#. Log in to the management console.
+#. Click |image1| in the upper left corner of the console and select a desired region and project.
+#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. On the displayed page, locate the load balancer and click its name.
+#. On the **Listeners** tab, locate the listener, and click its name.
+#. On the **Summary** tab, click **Configure** next to **Modification Protection**.
+#. In the displayed dialog box, enable **Modification Protection**. Once you enable it, you cannot modify or delete the listener. You cannot modify its forwarding policies and the default backend server group, either.
+
+.. note::
+
+   You need to disable **Modification Protection** if you want to modify or delete a listener.
+
+Modifying a Listener
 --------------------
 
 #. Log in to the management console.
-#. In the upper left corner of the page, click |image1| and select the desired region and project.
-#. Click |image2| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. In the upper left corner of the page, click |image3| and select the desired region and project.
+#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 #. Modify the listener in either of the following ways:
 
    -  On the **Listeners** page, locate the listener, and click **Edit** in the **Operation** column.
-   -  Click the name of the target listener. On the **Basic Information** page, click **Edit** on the top right corner.
+   -  Click the name of the target listener. On the **Summary** page, click **Edit** on the top right corner.
 
 #. On the **Edit** dialog box, modify parameters, and click **OK**.
 
@@ -36,8 +55,8 @@ Deleting a Listener
 -------------------
 
 #. Log in to the management console.
-#. In the upper left corner of the page, click |image3| and select the desired region and project.
-#. Click |image4| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
+#. In the upper left corner of the page, click |image5| and select the desired region and project.
+#. Click |image6| in the upper left corner to display **Service List** and choose **Network** > **Elastic Load Balancing**.
 #. Locate the load balancer and click its name.
 
    .. note::
@@ -51,7 +70,9 @@ Deleting a Listener
 #. In the displayed dialog box, enter **DELETE**.
 #. Click **OK**.
 
-.. |image1| image:: /_static/images/en-us_image_0000001747739624.png
-.. |image2| image:: /_static/images/en-us_image_0000001794660485.png
+.. |image1| image:: /_static/images/en-us_image_0000001961843941.png
+.. |image2| image:: /_static/images/en-us_image_0000001934685298.png
 .. |image3| image:: /_static/images/en-us_image_0000001747739624.png
 .. |image4| image:: /_static/images/en-us_image_0000001794660485.png
+.. |image5| image:: /_static/images/en-us_image_0000001747739624.png
+.. |image6| image:: /_static/images/en-us_image_0000001794660485.png
