@@ -36,7 +36,7 @@ The billing items of dedicated load balancers vary by specification type. For de
    Billing Mode Specifications LCU Load Balancer
    ============ ============== === =============
    Pay-per-use  Elastic        Y   Y
-   \            Fixed          Y   x
+   Pay-per-use  Fixed          Y   x
    ============ ============== === =============
 
 .. note::
@@ -55,13 +55,13 @@ The unit price of LCU varies depending on the specifications. See the actual pri
 
 .. table:: **Table 3** LCU pricing
 
-   +--------------+----------------+-------------------------+----------------------------------------------------------------------------+
-   | Billing Mode | Specifications | Application Scenario    | Description                                                                |
-   +==============+================+=========================+============================================================================+
-   | Pay-per-use  | Elastic        | For fluctuating traffic | You are charged for how many LCUs you use.                                 |
-   +--------------+----------------+-------------------------+----------------------------------------------------------------------------+
-   |              | Fixed          | For stable traffic      | You are charged for the LCUs based on each fixed specification you select. |
-   +--------------+----------------+-------------------------+----------------------------------------------------------------------------+
+   +--------------+--------------------+-------------------------+----------------------------------------------------------------------------+
+   | Billing Mode | Specification Type | Application Scenario    | Description                                                                |
+   +==============+====================+=========================+============================================================================+
+   | Pay-per-use  | Elastic            | For fluctuating traffic | You are charged for how many LCUs you use.                                 |
+   +--------------+--------------------+-------------------------+----------------------------------------------------------------------------+
+   |              | Fixed              | For stable traffic      | You are charged for the LCUs based on each fixed specification you select. |
+   +--------------+--------------------+-------------------------+----------------------------------------------------------------------------+
 
 .. note::
 
