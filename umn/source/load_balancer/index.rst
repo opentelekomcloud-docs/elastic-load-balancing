@@ -8,7 +8,7 @@ Load Balancer
 -  :ref:`Preparations for Creating a Load Balancer <elb_ug_fz_0004>`
 -  :ref:`Creating a Dedicated Load Balancer <elb_lb_000006>`
 -  :ref:`Creating a Shared Load Balancer <en-us_topic_0015479967>`
--  :ref:`Configuring Deletion Protection for Load Balancers <elb_ug_fz_0005>`
+-  :ref:`Configuring Modification Protection or Deletion Protection for a Load Balancer <elb_ug_fz_0007>`
 -  :ref:`Modifying the Bandwidth <elb_ug_fz_0015>`
 -  :ref:`Changing the Specifications of a Dedicated Load Balancer <elb_ug_fz_0016>`
 -  :ref:`Changing an IP Address <elb_lb_000010>`
@@ -24,7 +24,7 @@ Load Balancer
    preparations_for_creating_a_load_balancer
    creating_a_dedicated_load_balancer
    creating_a_shared_load_balancer
-   configuring_deletion_protection_for_load_balancers
+   configuring_modification_protection_or_deletion_protection_for_a_load_balancer
    modifying_the_bandwidth
    changing_the_specifications_of_a_dedicated_load_balancer
    changing_an_ip_address
