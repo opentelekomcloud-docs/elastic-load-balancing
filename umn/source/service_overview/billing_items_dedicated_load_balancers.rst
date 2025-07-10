@@ -25,6 +25,8 @@ For details about the prices of billing items, see the pricing details on the cr
    +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
    | Load balancer   | You are charged for **how long a dedicated load balancer is retained in your account**. If the load balancer is retained in your account for less than 1 hour, you will be charged for the actual duration, accurate to seconds. | Pay-per-use     | **Unit price x Required duration**  |
    +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
+   | Specifications  | You are charged by each specification you select.                                                                                                                                                                                | Pay-per-use     | **Unit price x Required duration**  |
+   +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+-------------------------------------+
 
 The billing items of dedicated load balancers vary by specification type. For details, see :ref:`Table 2 <elb_billing_0003__en-us_topic_0000001819164006_table2032117912396>`.
 
@@ -103,6 +105,10 @@ You can calculate the number of LCUs by taking the maximum LCUs consumed across 
 
 :ref:`Table 5 <elb_billing_0003__en-us_topic_0000001819164006_table1248129113817>` lists the LCU performance supported by different protocols.
 
+For TCP and UDP protocols, it has 3 LCU dimensions, the final LCU dimension will use the dimension which uses the most LCUs after calculation.
+
+For HTTP and HTTPS protocol, it has 4 LCU dimensions, the final LCU dimension will use the dimension which uses the most LCUs after calculation.
+
 .. _elb_billing_0003__en-us_topic_0000001819164006_table1248129113817:
 
 .. table:: **Table 5** LCU performance supported by different protocols
@@ -116,6 +122,53 @@ You can calculate the number of LCUs by taking the maximum LCUs consumed across 
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+
    | HTTP/HTTPS | 25                         | 3,000                                     | 1 GB            | 1,000                       |
    +------------+----------------------------+-------------------------------------------+-----------------+-----------------------------+
+
+Billing Examples
+----------------
+
+**A pricing example for a network load balancer**
+
+Assume your network load balancer establishes 1,000 new TCP connections per second and handles a maximum of 180,000 concurrent connections per minute. The bytes processed by your load balancer is 1,000 KB per second.
+
+The LCU price is calculated as the table shown below.
+
+.. table:: **Table 6** LCU calculation
+
+   +-------------------------------------------+----------------------------------------+-----------------------------+-----------------+
+   | Dimension                                 | Example                                | LCUs                        | Rounded Up LCUs |
+   +===========================================+========================================+=============================+=================+
+   | New connections per second                | 1,000                                  | 1,000 ÷ 800 = **1.25**      | 2               |
+   +-------------------------------------------+----------------------------------------+-----------------------------+-----------------+
+   | Maximum concurrent connections per minute | 180,000                                | 180,000 ÷ 100,000 = **1.8** | 2               |
+   +-------------------------------------------+----------------------------------------+-----------------------------+-----------------+
+   | Processed bytes per hour                  | 1,000 KB/s x 60s x 60 minutes = 3.6 GB | 3.6 ÷ 1 = **3.6**           | 4               |
+   +-------------------------------------------+----------------------------------------+-----------------------------+-----------------+
+
+In this example, the processed bytes dimension consumes the most LCUs (**4** LCUs). Therefore, the LCU price is calculated based on the number of LCUs consumed by processed bytes.
+
+**A pricing example for an application load balancer**
+
+Assume your application load balancer establishes 1,000 new HTTP/HTTPS connections per second and handles a maximum of 180,000 concurrent connections per minute. A client sends an average of 400 requests per second and the bytes processed by this load balancer is 1,000 KB per second. You have configured 20 forwarding rules for your load balancer to route requests.
+
+.. table:: **Table 7** LCU calculation
+
+   +-------------------------------------------+-----------------------------------------------------------+--------------------------+-----------------+
+   | Dimension                                 | Example                                                   | LCUs                     | Rounded Up LCUs |
+   +===========================================+===========================================================+==========================+=================+
+   | New connections per second                | 1,000                                                     | 1,000 ÷ 25 = **40**      | 40              |
+   +-------------------------------------------+-----------------------------------------------------------+--------------------------+-----------------+
+   | Maximum concurrent connections per minute | 180,000                                                   | 180,000 ÷ 3,000 = **60** | 60              |
+   +-------------------------------------------+-----------------------------------------------------------+--------------------------+-----------------+
+   | Processed bytes per hour                  | 1,000 KB/s x 60s x 60 minutes = 3.6 GB                    | 3.6 ÷ 1 = **3.6**        | 4               |
+   +-------------------------------------------+-----------------------------------------------------------+--------------------------+-----------------+
+   | Rule evaluations per second               | Rule evaluations are calculated as:                       | 4,000 ÷ 1,000 = **4**    | 4               |
+   |                                           |                                                           |                          |                 |
+   |                                           | Rule evaluations = QPS x (Number of processed rules - 10) |                          |                 |
+   |                                           |                                                           |                          |                 |
+   |                                           | = 400 x (20 - 10) = 4,000                                 |                          |                 |
+   +-------------------------------------------+-----------------------------------------------------------+--------------------------+-----------------+
+
+In this example, the maximum concurrent connection dimension consumes the most LCUs (**60** LCUs). So the LCU price is calculated based on the LCUs consumed by the maximum concurrent connections.
 
 Load Balancer Pricing
 ---------------------
