@@ -32,7 +32,7 @@ If the traffic exceeds the selected specifications, new requests will be discard
 Elastic Specifications
 ----------------------
 
-If your service traffic fluctuates greatly, you can choose elastic specifications and select network load balancing (TCP/UDP) or application load balancing (HTTP/HTTPS), or both that best meet your service needs.
+If your service traffic fluctuates greatly, you can choose elastic specifications and select either network load balancing (TCP/UDP) or application load balancing (HTTP/HTTPS), or both that best meet your service needs.
 
 .. note::
 
