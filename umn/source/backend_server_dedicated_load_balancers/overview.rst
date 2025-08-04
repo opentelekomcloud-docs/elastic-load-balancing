@@ -46,7 +46,7 @@ You need to set a weight for each backend server in a backend server group to re
 
 The weight ranges from **0** to **100**. If you set the weight of a backend server to **0**, new requests will not be routed to this server.
 
-Three load balancing algorithms allow you to set weights to backend servers, as shown in the following table. For more information about load balancing algorithms, see :ref:`Load Balancing Algorithms <elb_ug_jt_0003>`.
+The below load balancing algorithms allow you to set weights to backend servers, as shown in the following table. For more information about load balancing algorithms, see :ref:`Load Balancing Algorithms <elb_ug_jt_0003>`.
 
 .. table:: **Table 2** Server weights in different load balancing algorithms
 

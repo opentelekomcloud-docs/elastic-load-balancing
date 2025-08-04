@@ -128,7 +128,7 @@ Billing Examples
 
 **A pricing example for a network load balancer**
 
-Assume your network load balancer establishes 1,000 new TCP connections per second and handles a maximum of 180,000 concurrent connections per minute. The bytes processed by your load balancer is 1,000 KB per second.
+Assume your network load balancer establishes 1,000 new TCP connections per second and handles a maximum of 180,000 concurrent connections per minute. The bytes processed by your load balancer are 1,000 KB per second.
 
 The LCU price is calculated as the table shown below.
 
