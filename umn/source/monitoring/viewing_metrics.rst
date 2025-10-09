@@ -31,6 +31,22 @@ Prerequisites
 
 -  If an IAM user wants to view the ELB monitoring data on the Cloud Eye console, the IAM user must be granted the **ELB Administrator** permission. Otherwise, the IAM user cannot view all monitoring data.
 
+.. _elb_ug_jk_0005__section206251335141720:
+
+Viewing Monitoring Metrics on the ELB Console
+---------------------------------------------
+
+#. Log in to the management console.
+#. Choose **Network** > **Elastic Load Balancing**.
+#. Locate the load balancer and click its name.
+#. View the metrics of each load balancer and listener.
+
+   a. Load balancer: Click **Monitoring** tab and select **Load balancer** for **Dimension**.
+   b. Listener (two ways):
+
+      #. Click **Monitoring** tab, select **Load listener** for **Dimension**, locate the target listener, and view the monitoring metrics.
+      #. Click the name of the target listener, switch to the **Monitoring** tab, and view the monitoring metrics.
+
 Viewing Monitoring Metrics on the Cloud Eye Console
 ---------------------------------------------------
 
