@@ -116,7 +116,7 @@ The following table lists how a URL is matched, and :ref:`Figure 1 <en-us_topic_
 .. table:: **Table 2** URL matching
 
    +--------------------------+-----------------+------------------------------+------+--------------+-------------+
-   | URL Matching Rule        | URL             | URL in the Forwarding Policy |      |              |             |
+   | URL Matching Rule        | URL             | URL in the Forwarding Policy | _    | _            | _           |
    +==========================+=================+==============================+======+==============+=============+
    | N/A                      | N/A             | /elb/index.html              | /elb | /elb[^\\s]\* | /index.html |
    +--------------------------+-----------------+------------------------------+------+--------------+-------------+
