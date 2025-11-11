@@ -10,6 +10,7 @@ Listener
 -  :ref:`Viewing Details of a Listener <showlistener>`
 -  :ref:`Updating a Listener <updatelistener>`
 -  :ref:`Deleting a Listener <deletelistener>`
+-  :ref:`Deleting a Listener and Its Associated Resources <deletelistenerforce>`
 
 .. toctree::
    :maxdepth: 1
@@ -20,3 +21,4 @@ Listener
    viewing_details_of_a_listener
    updating_a_listener
    deleting_a_listener
+   deleting_a_listener_and_its_associated_resources

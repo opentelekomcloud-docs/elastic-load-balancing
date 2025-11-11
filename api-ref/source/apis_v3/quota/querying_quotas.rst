@@ -196,7 +196,7 @@ Response Parameters
 Example Requests
 ----------------
 
-Specifies the resource quotas of a specific user.
+Obtaining the resource quotas of a specific user
 
 .. code-block:: text
 
