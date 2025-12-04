@@ -10,6 +10,7 @@ APIs (V2.0)
 -  :ref:`Listener <elb_zq_jt_0000>`
 -  :ref:`Backend Server Group <elb_zq_hz_0000>`
 -  :ref:`Backend Server <elb_zq_hd_0000>`
+-  :ref:`Quota <elb_zq_pe_0000>`
 -  :ref:`Health Check <elb_zq_jk_0000>`
 -  :ref:`Forwarding Policy <elb_zq_zf_0000>`
 -  :ref:`Forwarding Rule <elb_zq_zg_0000>`
@@ -26,6 +27,7 @@ APIs (V2.0)
    listener/index
    backend_server_group/index
    backend_server/index
+   quota/index
    health_check/index
    forwarding_policy/index
    forwarding_rule/index

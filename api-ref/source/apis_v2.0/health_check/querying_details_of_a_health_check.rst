@@ -8,7 +8,7 @@ Querying Details of a Health Check
 Function
 --------
 
-This API is used to query details about a health check using its iD.
+This API is used to query details about a health check using its ID.
 
 URI
 ---

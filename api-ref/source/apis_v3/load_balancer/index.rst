@@ -10,6 +10,7 @@ Load Balancer
 -  :ref:`Viewing Details of a Load Balancer <showloadbalancer>`
 -  :ref:`Updating a Load Balancer <updateloadbalancer>`
 -  :ref:`Deleting a Load Balancer <deleteloadbalancer>`
+-  :ref:`Deleting a Load Balancer and Its Associated Resources <deleteloadbalancerforce>`
 -  :ref:`Querying the Status Tree of a Load Balancer <showloadbalancerstatus>`
 
 .. toctree::
@@ -21,4 +22,5 @@ Load Balancer
    viewing_details_of_a_load_balancer
    updating_a_load_balancer
    deleting_a_load_balancer
+   deleting_a_load_balancer_and_its_associated_resources
    querying_the_status_tree_of_a_load_balancer

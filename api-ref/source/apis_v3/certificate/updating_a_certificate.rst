@@ -13,7 +13,7 @@ This API is used to update an SSL certificate.
 Constraints
 -----------
 
-If a certificate wth a domain name is used by a listener, the domain name cannot be updated to an empty string (""), and the system returns the 409 Conflict status code.
+If a certificate with a domain name is used by a listener, the domain name cannot be updated to an empty string (""), and the system returns the 409 Conflict status code.
 
 URI
 ---

@@ -1,0 +1,129 @@
+:original_name: elb_zq_pe_0002.html
+
+.. _elb_zq_pe_0002:
+
+Querying Current Resource Quotas
+================================
+
+Function
+--------
+
+This API is used to query existing resource quotas.
+
+URI
+---
+
+GET /v2.0/lbaas/quotas/{project_id}
+
+Request
+-------
+
+.. table:: **Table 1** Parameter description
+
+   +------------+-----------+--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter  | Mandatory | Type   | Description                                                                                                                                                                                                                                                                      |
+   +============+===========+========+==================================================================================================================================================================================================================================================================================+
+   | fields     | No        | String | Defines the parameters to be returned by the server. If the URL does not contain this parameter, all parameters are returned. For example, if the URL contains **parameters=pool&parameters=member**, only the quotas of backend server groups and backend servers are returned. |
+   +------------+-----------+--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | project_id | Yes       | String | Specifies the project ID.                                                                                                                                                                                                                                                        |
+   +------------+-----------+--------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Response
+--------
+
+.. table:: **Table 2** Response parameters
+
+   +-----------+--------+------------------------------------------------------------------------------------------------------------------------------------+
+   | Parameter | Type   | Description                                                                                                                        |
+   +===========+========+====================================================================================================================================+
+   | quota     | String | Specifies the resource quotas. For details, see :ref:`Table 3 <elb_zq_pe_0002__en-us_topic_0000001129261930_table16509103102119>`. |
+   +-----------+--------+------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _elb_zq_pe_0002__en-us_topic_0000001129261930_table16509103102119:
+
+.. table:: **Table 3** **quota** parameter description
+
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | Parameter                                | Type    | Description                                                                                       |
+   +==========================================+=========+===================================================================================================+
+   | healthmonitor                            | Integer | Specifies the health check quota.                                                                 |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | listener                                 | Integer | Specifies the listener quota.                                                                     |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | loadbalancer                             | Integer | Specifies the load balancer quota.                                                                |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | member                                   | Integer | Specifies the backend server quota.                                                               |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | pool                                     | Integer | Specifies the backend server group quota.                                                         |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | l7policy                                 | Integer | Specifies the forwarding policy quota.                                                            |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | certificate                              | Integer | Specifies the certificate quota.                                                                  |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | ipgroup                                  | Integer | Specifies the IP address group quota.                                                             |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | security_policy                          | Integer | Specifies the custom security policy quota.                                                       |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | listeners_per_loadbalancer               | Integer | Specifies the maximum number of listeners that can be added to a load balancer.                   |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | listeners_per_pool                       | Integer | Specifies the maximum number of listeners that can be associated with a backend server group.     |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | condition_per_policy                     | Integer | Specifies the maximum number of forwarding conditions per forwarding policy.                      |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | members_per_pool                         | Integer | Specifies the maximum number of backend servers that can be added to a backend server group.      |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | ipgroup_bindings                         | Integer | Specifies the maximum number of listeners that can be associated with an IP address group.        |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | ipgroup_max_length                       | Integer | Specifies the maximum number of IP entries that can be added to an IP address group.              |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | free_instance_listeners_per_loadbalancer | Integer | Specifies the maximum number of free listeners that can be added to a load balancer.              |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+   | free_instance_members_per_pool           | Integer | Specifies the maximum number of free backend servers that can be added to a backend server group. |
+   +------------------------------------------+---------+---------------------------------------------------------------------------------------------------+
+
+.. note::
+
+   **-1** indicates that the quota is not limited.
+
+Example Request
+---------------
+
+-  Example request: Querying current resource quotas
+
+   .. code-block:: text
+
+      GET https://{Endpoint}/v2.0/lbaas/quotas/e3cd678b11784734bc366148aa37580e
+
+Example Response
+----------------
+
+-  Example response
+
+   .. code-block::
+
+      {
+          "quota": {
+              "ipgroup_bindings": 50,
+              "condition_per_policy": 10,
+              "listeners_per_loadbalancer": 50,
+              "member": 500,
+              "free_instance_members_per_pool": 10,
+              "loadbalancer": 50,
+              "ipgroup": 50,
+              "listeners_per_pool": 50,
+              "certificate": 120,
+              "healthmonitor": -1,
+              "ipgroup_max_length": 300,
+              "l7policy": 500,
+              "listener": 100,
+              "free_instance_listeners_per_loadbalancer": 5,
+              "members_per_pool": 500,
+              "security_policy": 50,
+              "pool": 500
+          }
+      }
+
+Status Code
+-----------
+
+For details, see :ref:`HTTP Status Codes of Shared Load Balancers <elb_gc_0002>`.
