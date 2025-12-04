@@ -14,11 +14,11 @@ Note:
 
 -  If a load balancer has EIPs bound to it, the EIPs will be unbound from the load balancer.
 
--  If Deletion protection feature is enabled for ELB, it won’t be possible to delete the ELB and it’s resources.
+-  If deletion protection is enabled for the load balancer, the load balancer and its associated resources cannot be deleted.
 
--  If Removal protection feature is enabled for a Backend Server Group used by the ELB, it won’t be possible to delete the ELB and it’s resources.
+-  If deletion protection is enabled for any backend server group of the load balancer, the load balancer and its associated resources cannot be deleted.
 
--  If only Modification protection feature is enabled it won’t protect it from force-deletion.
+-  If modification protection is enabled for the load balancer, the load balancer and its associated resources can be deleted.
 
 URI
 ---

@@ -13,7 +13,7 @@ This API is used to add a forwarding rule.
 Constraints
 -----------
 
-If the action of **l7policy** is set to **Redirect to another listener**, **17rule** cannot be created.
+The forwarding rule cannot be created when **action** is set to **REDIRECT_TO_LISTENER**.
 
 URI
 ---
