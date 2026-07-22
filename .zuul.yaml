@@ -5,6 +5,13 @@
     - api-ref-hc-jobs
     - helpcenter-base-jobs
     - umn-hc-jobs
+    vars:
+      sphinx_pdf_files:
+        - elb-umn.pdf
+        - elb-api-ref.pdf
     check:
+      jobs:
+      - noop
+    gate:
       jobs:
       - noop
